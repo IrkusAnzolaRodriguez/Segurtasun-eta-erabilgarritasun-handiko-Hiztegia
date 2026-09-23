@@ -186,8 +186,58 @@
         <!-- JS-k sortuko ditu txartelak -->
       </div>
 
+      <!-- HAUSNARKETA ETA BALORAZIO KRITIKO GLOBALA (4. PUNTUA) -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm dark:shadow-lg transition-colors">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+            <i data-lucide="message-square-quote" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              Hausnarketa eta Balorazio Kritiko Globala
+              <span class="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800/50">
+                1. Gaiaren Iritzia
+              </span>
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Malware eta erasoen bilakaerari buruzko azterketa pertsonala</p>
+          </div>
+        </div>
+
+        <div class="space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p>
+            Lehen gai honetan aztertutako sei mehatxuek argi erakusten dute zibersegurtasunaren paradigma guztiz aldatu dela. Antzina birusen helburu nagusia sistemak hondatzea edo fitxategiak ezabatzea bazen ere, gaur egungo erasoek mozkin ekonomiko zuzena, isilpeko espioitza edo zerbitzuen kolapso estrategikoa bilatzen dute.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80">
+              <span class="text-xs font-bold text-slate-900 dark:text-white block mb-1.5 flex items-center gap-1.5">
+                <i data-lucide="user-x" class="w-4 h-4 text-amber-500"></i> Giza Faktorea
+              </span>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
+                Phishing-ak agerian uzten du teknologia bezain garrantzitsua dela erabiltzaileen heziketa; kate-begirik ahulena pertsona izaten jarraitzen du.
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80">
+              <span class="text-xs font-bold text-slate-900 dark:text-white block mb-1.5 flex items-center gap-1.5">
+                <i data-lucide="shield-alert" class="w-4 h-4 text-cyan-500"></i> Ezkutuko Mehatxuak
+              </span>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
+                Stealer, Spyware eta Atzeko Ateen helburua oharkabean pasatzea da, saio-cookieak eta kredentzialak lapurtuz 2FA babesak saihesteko.
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80">
+              <span class="text-xs font-bold text-slate-900 dark:text-white block mb-1.5 flex items-center gap-1.5">
+                <i data-lucide="server" class="w-4 h-4 text-red-500"></i> Defentsa Proaktiboa
+              </span>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
+                ASIR administratzaile gisa, ezinbestekoa da Zero Trust arkitektura ezartzea: baimen minimoak eman, sareak segmentatu eta irteera-trafikoa monitorizatu.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- DESPLEGABLE DE FUENTES Y DOCUMENTACIÓN -->
-      <div class="mt-12 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-lg transition-colors overflow-hidden">
+      <div class="rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-lg transition-colors overflow-hidden">
         
         <!-- Botoi tolesgarria -->
         <button onclick="toggleSources()" class="w-full p-6 text-left flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
@@ -205,7 +255,7 @@
               <p class="text-xs text-slate-500 dark:text-slate-400">Klikatu termino bakoitzaren kasu historikoa, entziklopedia ofiziala eta txosten teknikoak ikusteko</p>
             </div>
           </div>
-          <div class="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 text-s font-semibold">
+          <div class="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 text-xs font-semibold">
             <span id="sources-btn-label">Zabaldu iturriak</span>
             <i id="sources-chevron" data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
           </div>
@@ -549,7 +599,7 @@
               <button onclick="toggleCard('${term.id}', event)" class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold flex items-center justify-between transition-all duration-200 ${isExpanded ? 'bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-500/40' : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/70 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60'}">
                 <span class="flex items-center gap-2">
                   <i data-lucide="${isExpanded ? 'chevron-up' : 'chevron-down'}" class="w-4 h-4"></i>
-                  ${isExpanded ? 'Ezkutatu printzipioak eta kasu erreala' : 'Ikusi printzipioak eta benetako kasua'}
+                  ${isExpanded ? 'Ezkutatu printzipioak eta kasua' : 'Ikusi printzipioak eta benetako kasua'}
                 </span>
                 <span class="text-[10px] font-mono ${isExpanded ? 'text-cyan-700 dark:text-cyan-400' : 'text-slate-500 dark:text-slate-400'}">
                   ${isExpanded ? 'Itxi' : ''}
@@ -559,6 +609,7 @@
 
             <div id="content-${term.id}" class="${isExpanded ? 'block' : 'hidden'} mt-5 space-y-5 pt-4 border-t border-slate-200 dark:border-slate-800/60">
               
+              <!-- 1. Printzipioak -->
               <div>
                 <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3 flex items-center gap-1.5">
                   <i data-lucide="layers" class="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400"></i>
@@ -576,6 +627,7 @@
                 </div>
               </div>
 
+              <!-- 2. Kasu Erreala -->
               <div class="p-4 rounded-xl bg-gradient-to-br from-cyan-50 to-slate-100 dark:from-cyan-950/40 dark:to-slate-900 border border-cyan-200 dark:border-cyan-800/40">
                 <div class="flex items-center justify-between gap-2 mb-2">
                   <span class="text-[10px] font-mono uppercase tracking-wider font-bold text-cyan-700 dark:text-cyan-300 flex items-center gap-1.5">
