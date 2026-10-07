@@ -1,740 +1,1206 @@
 <!DOCTYPE html>
 <html lang="eu" class="dark">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Segurtasun Informatikoaren Hiztegi Digitala</title>
-  
-  <!-- FAVICON: Nabigatzailearen pestainan agertuko den ikonoa (SVG zibernetikoa) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230891b2' stroke='%2306b6d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'%3E%3C/path%3E%3Cpath d='m9 12 2 2 4-4' stroke='%23ffffff' stroke-width='2.5'%3E%3C/path%3E%3C/svg%3E">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segurtasun Informatikoaren Hiztegi Digitala</title>
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230891b2' stroke='%2306b6d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'%3E%3C/path%3E%3Cpath d='m9 12 2 2 4-4' stroke='%23ffffff' stroke-width='2.5'%3E%3C/path%3E%3C/svg%3E">
 
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            cyber: {
-              950: '#070a13',
-              900: '#0b1120',
-              800: '#111b33',
-              700: '#1b2a4e',
-              border: '#20345e',
-              primary: '#0ea5e9',
-              secondary: '#6366f1'
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            950: '#070a13',
+                            900: '#0b1120',
+                            800: '#111b33',
+                            700: '#1b2a4e',
+                            border: '#20345e',
+                            primary: '#0ea5e9',
+                            secondary: '#6366f1'
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  </script>
-  
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    
-    .font-mono-code {
-      font-family: 'JetBrains Mono', monospace;
-    }
-    
-    .custom-scroll::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scroll::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .custom-scroll::-webkit-scrollbar-thumb {
-      background: #94a3b8;
-      border-radius: 4px;
-    }
-    .dark .custom-scroll::-webkit-scrollbar-thumb {
-      background: #1e293b;
-    }
+    </script>
 
-    .card-transition {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-  </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap');
 
-  <script>
-    if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-      document.documentElement.classList.remove('dark');
-    } else {
-      document.documentElement.classList.add('dark');
-    }
-  </script>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+
+        .font-mono-code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .custom-scroll::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+
+        .dark .custom-scroll::-webkit-scrollbar-thumb {
+            background: #1e293b;
+        }
+
+        .card-transition {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes floatShield {
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-4px) scale(1.01);
+            }
+        }
+
+        .animate-float-shield {
+            animation: floatShield 4s ease-in-out infinite;
+        }
+    </style>
+
+    <script>
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
 </head>
-<body class="min-h-screen flex flex-col custom-scroll bg-slate-50 dark:bg-[#070a13] text-slate-800 dark:text-slate-100 selection:bg-cyan-500/20 selection:text-cyan-600 dark:selection:text-cyan-300">
 
-  <!-- GOIBURUA ETA NABIGAZIOA -->
-  <header class="sticky top-0 z-50 bg-white/90 dark:bg-[#070a13]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 sm:h-20 gap-2">
-        
-        <!-- Logoa eta Izenburua -->
-        <div class="flex items-center gap-3 shrink-0">
-          <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
-            <i data-lucide="shield-check" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <h1 class="text-base sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-              Segurtasun Hiztegia
-            </h1>
-            <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">IRKUS ANZOLA</p>
-          </div>
-        </div>
+<body
+    class="min-h-screen flex flex-col custom-scroll bg-slate-100 dark:bg-[#070a13] text-slate-900 dark:text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200">
 
-        <!-- 4 Gaien Menua + Modu Aldaketa -->
-        <div class="flex items-center gap-2 sm:gap-4">
-          <nav class="flex items-center gap-1 sm:gap-2">
-            <button onclick="switchTopic(1)" id="btn-topic-1" class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 sm:gap-2 bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/40 shadow-sm">
-              <i data-lucide="skull" class="w-4 h-4"></i>
-              <span class="hidden md:inline">1. Gaia</span>
-            </button>
-            
-            <button onclick="switchTopic(2)" id="btn-topic-2" class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 border border-transparent transition-all duration-200 flex items-center gap-1.5 sm:gap-2">
-              <i data-lucide="key" class="w-4 h-4"></i>
-              <span class="hidden md:inline">2. Gaia</span>
-            </button>
-            
-            <button onclick="switchTopic(3)" id="btn-topic-3" class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 border border-transparent transition-all duration-200 flex items-center gap-1.5 sm:gap-2">
-              <i data-lucide="network" class="w-4 h-4"></i>
-              <span class="hidden md:inline">3. Gaia</span>
-            </button>
-            
-            <button onclick="switchTopic(4)" id="btn-topic-4" class="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 border border-transparent transition-all duration-200 flex items-center gap-1.5 sm:gap-2">
-              <i data-lucide="shield" class="w-4 h-4"></i>
-              <span class="hidden md:inline">4. Gaia</span>
-            </button>
-          </nav>
+    <!-- GOIBURUA ETA NABIGAZIOA -->
+    <header
+        class="sticky top-0 z-50 bg-white dark:bg-[#070a13]/95 backdrop-blur-md border-b-2 border-slate-300 dark:border-slate-800 shadow-sm transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20 gap-2">
 
-          <!-- Modu Ilun / Argi Botoia -->
-          <button id="theme-toggle" onclick="toggleDarkMode()" aria-label="Txandakatu gaia" class="p-2 sm:p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900/80 text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all">
-            <i id="theme-icon" data-lucide="sun" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </header>
-
-  <!-- EDUKI NAGUSIA -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-
-    <!-- ==================== 1. GAIA ==================== -->
-    <section id="topic-1-content" class="space-y-8">
-      
-      <!-- Goiko Panela eta Semaforoa -->
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-100 via-white to-slate-100 dark:from-slate-900 dark:via-[#0e1629] dark:to-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm dark:shadow-none transition-colors">
-        <div class="absolute -right-16 -top-16 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div class="max-w-2xl">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-300 dark:border-cyan-800/50 text-cyan-800 dark:text-cyan-400 text-xs font-mono mb-3">
-              <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
-              Hiztegi Teknikoa
-            </div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-              Malware eta Eraso Motak
-            </h2>
-            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
-              Zibersegurtasuneko sei kontzeptuak: definizioak, segurtasun-printzipioetan duten eragina eta mundu errealeko kasu historikoak.
-            </p>
-          </div>
-
-          <!-- Semaforoaren Gida -->
-          <div class="bg-white/80 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800/80 rounded-xl p-4 sm:p-5 backdrop-blur-sm shrink-0 shadow-sm dark:shadow-none">
-            <h3 class="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-3 flex items-center gap-2">
-              <i data-lucide="sliders" class="w-4 h-4 text-cyan-600 dark:text-cyan-400"></i>
-              Segurtasun-Printzipioen Egoerak:
-            </h3>
-            <div class="flex flex-col gap-2.5 text-xs">
-              <div class="flex items-center gap-3">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-300 border border-red-300 dark:border-red-500/40 w-24 justify-center">
-                  Hautsita
-                </span>
-                <span class="text-slate-600 dark:text-slate-400 text-[11px]">Gorria: Printzipioa erabat urratua edo hondatua</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200 border border-amber-300 dark:border-amber-500/40 w-24 justify-center">
-                  Arriskuan
-                </span>
-                <span class="text-slate-600 dark:text-slate-400 text-[11px]">Horia: Printzipioa mehatxatuta edo arriskuan</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40 w-24 justify-center">
-                  Bermatua
-                </span>
-                <span class="text-slate-600 dark:text-slate-400 text-[11px]">Berdea: Printzipioa seguru dago, erasoak ez du urratzen</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TXARTELEN SAREA (6 TERMINOAK) -->
-      <div id="terms-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-        <!-- JS-k sortuko ditu txartelak -->
-      </div>
-
-      <!-- HAUSNARKETA ETA BALORAZIO KRITIKO GLOBALA -->
-      <div class="rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm dark:shadow-lg transition-colors">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
-            <i data-lucide="message-square-quote" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              Hausnarketa eta Balorazio Kritiko Globala
-              <span class="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800/50">
-                1. Gaiaren Iritzia
-              </span>
-            </h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Malware eta erasoen bilakaerari buruzko azterketa pertsonala</p>
-          </div>
-        </div>
-
-        <div class="space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-          <p>
-            Lehen gai honetan aztertutako sei mehatxuek argi erakusten dute zibersegurtasunaren paradigma guztiz aldatu dela. Antzina birusen helburu nagusia sistemak hondatzea edo fitxategiak ezabatzea bazen ere, gaur egungo erasoek mozkin ekonomiko zuzena, isilpeko espioitza edo zerbitzuen kolapso estrategikoa bilatzen dute.
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80">
-              <span class="text-xs font-bold text-slate-900 dark:text-white block mb-1.5 flex items-center gap-1.5">
-                <i data-lucide="user-x" class="w-4 h-4 text-amber-500"></i> Giza Faktorea
-              </span>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
-                Phishing-ak agerian uzten du teknologia bezain garrantzitsua dela erabiltzaileen heziketa; kate-begirik ahulena pertsona izaten jarraitzen du.
-              </p>
-            </div>
-            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80">
-              <span class="text-xs font-bold text-slate-900 dark:text-white block mb-1.5 flex items-center gap-1.5">
-                <i data-lucide="shield-alert" class="w-4 h-4 text-cyan-500"></i> Ezkutuko Mehatxuak
-              </span>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
-                Stealer, Spyware eta Atzeko Ateen helburua oharkabean pasatzea da, saio-cookieak eta kredentzialak lapurtuz 2FA babesak saihesteko.
-              </p>
-            </div>
-            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80">
-              <span class="text-xs font-bold text-slate-900 dark:text-white block mb-1.5 flex items-center gap-1.5">
-                <i data-lucide="server" class="w-4 h-4 text-red-500"></i> Defentsa Proaktiboa
-              </span>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
-                ASIR administratzaile gisa, ezinbestekoa da Zero Trust arkitektura ezartzea: baimen minimoak eman, sareak segmentatu eta irteera-trafikoa monitorizatu.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- DESPLEGABLE DE FUENTES Y DOCUMENTACIÓN -->
-      <div class="rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-lg transition-colors overflow-hidden">
-        
-        <!-- Botoi tolesgarria -->
-        <button onclick="toggleSources()" class="w-full p-6 text-left flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
-          <div class="flex items-center gap-3">
-            <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400">
-              <i data-lucide="book-marked" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                Informazio-Iturriak eta Erreferentzia Egiaztatuak
-                <span class="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-800/50">
-                  Esteka Egonkorrak
-                </span>
-              </h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Klikatu termino bakoitzaren kasu historikoa, entziklopedia ofiziala eta txosten teknikoak ikusteko</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 text-s font-semibold">
-            <span id="sources-btn-label">Zabaldu iturriak</span>
-            <i id="sources-chevron" data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
-          </div>
-        </button>
-
-        <!-- Eduki tolesgarria -->
-        <div id="sources-content" class="hidden border-t border-slate-200 dark:border-slate-800 p-6 space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            
-            <!-- 1. Phishing -->
-            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-[10px] font-mono font-bold uppercase text-amber-600 dark:text-amber-400">1. Phisinga</span>
-                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20">Podesta</span>
-                </div>
-                <h4 class="text-xs font-bold text-slate-900 dark:text-white mb-1">John Podesta Posta-Iruzurra</h4>
-                <p class="text-[11px] text-slate-600 dark:text-slate-400 mb-3">Google-ren segurtasun mezu faltsu baten bitartez egindako iruzurraren dokumentazio osoa.</p>
-              </div>
-              <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/80">
-                <a href="https://en.wikipedia.org/wiki/Podesta_emails" target="_blank" rel="noopener noreferrer" class="text-xs text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1.5 font-medium">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5 shrink-0"></i> Wikipedia: Podesta emails (Kasu osoa)
-                </a>
-                <a href="https://attack.mitre.org/techniques/T1566/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 dark:text-slate-400 hover:underline flex items-center gap-1.5">
-                  <i data-lucide="shield" class="w-3.5 h-3.5 shrink-0"></i> MITRE ATT&CK: Phishing (T1566)
-                </a>
-              </div>
-            </div>
-
-            <!-- 2. DoS -->
-            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-[10px] font-mono font-bold uppercase text-red-600 dark:text-red-400">2. Biren erasoa (DoS)</span>
-                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-red-500/10 text-red-700 dark:text-red-300 border border-red-500/20">Dyn Mirai</span>
-                </div>
-                <h4 class="text-xs font-bold text-slate-900 dark:text-white mb-1">Dyn DNS hornitzailearen kolapsoa</h4>
-                <p class="text-[11px] text-slate-600 dark:text-slate-400 mb-3">Mirai botnet-ak eragindako Interneteko erorketa historikoaren txostena.</p>
-              </div>
-              <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/80">
-                <a href="https://en.wikipedia.org/wiki/2016_Dyn_cyberattack" target="_blank" rel="noopener noreferrer" class="text-xs text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1.5 font-medium">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5 shrink-0"></i> Wikipedia: 2016 Dyn cyberattack
-                </a>
-                <a href="https://attack.mitre.org/techniques/T1498/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 dark:text-slate-400 hover:underline flex items-center gap-1.5">
-                  <i data-lucide="shield" class="w-3.5 h-3.5 shrink-0"></i> MITRE ATT&CK: Network DoS (T1498)
-                </a>
-              </div>
-            </div>
-
-            <!-- 3. Troiarra -->
-            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-[10px] font-mono font-bold uppercase text-rose-600 dark:text-rose-400">3. Troiarra</span>
-                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-500/20">Zeus Zbot</span>
-                </div>
-                <h4 class="text-xs font-bold text-slate-900 dark:text-white mb-1">Zeus (Zbot) Banku-Malwarea</h4>
-                <p class="text-[11px] text-slate-600 dark:text-slate-400 mb-3">Milaka banku-kontu hustu zituen software maltzurraren fitxa teknikoa.</p>
-              </div>
-              <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/80">
-                <a href="https://en.wikipedia.org/wiki/Zeus_(malware)" target="_blank" rel="noopener noreferrer" class="text-xs text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1.5 font-medium">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5 shrink-0"></i> Wikipedia: Zeus (malware) historia osoa
-                </a>
-                <a href="https://attack.mitre.org/software/S0118/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 dark:text-slate-400 hover:underline flex items-center gap-1.5">
-                  <i data-lucide="shield" class="w-3.5 h-3.5 shrink-0"></i> MITRE ATT&CK: Zeus Fitxa Teknikoa (S0118)
-                </a>
-              </div>
-            </div>
-
-            <!-- 4. Backdoor -->
-            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-[10px] font-mono font-bold uppercase text-purple-600 dark:text-purple-400">4. Backdoorsak</span>
-                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">SUNBURST</span>
-                </div>
-                <h4 class="text-xs font-bold text-slate-900 dark:text-white mb-1">SolarWinds SUNBURST Atzeko Atea</h4>
-                <p class="text-[11px] text-slate-600 dark:text-slate-400 mb-3">Hornikuntza-katearen bidez mila erakunde zelatatu zituen atzeko atearen analisia.</p>
-              </div>
-              <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/80">
-                <a href="https://en.wikipedia.org/wiki/2020_United_States_federal_government_data_breach" target="_blank" rel="noopener noreferrer" class="text-xs text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1.5 font-medium">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5 shrink-0"></i> Wikipedia: 2020 SolarWinds Hack
-                </a>
-                <a href="https://attack.mitre.org/software/S0559/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 dark:text-slate-400 hover:underline flex items-center gap-1.5">
-                  <i data-lucide="shield" class="w-3.5 h-3.5 shrink-0"></i> MITRE ATT&CK: SUNBURST (S0559)
-                </a>
-              </div>
-            </div>
-
-            <!-- 5. Spyware -->
-            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-[10px] font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400">5. Spywarea</span>
-                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">NSO Group</span>
-                </div>
-                <h4 class="text-xs font-bold text-slate-900 dark:text-white mb-1">Pegasus Espioitza Proiektua</h4>
-                <p class="text-[11px] text-slate-600 dark:text-slate-400 mb-3">Mugikorrak zero-click bidez espiatzeko sortutako tresnaren ikerketa eta kasuak.</p>
-              </div>
-              <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/80">
-                <a href="https://en.wikipedia.org/wiki/Pegasus_(spyware)" target="_blank" rel="noopener noreferrer" class="text-xs text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1.5 font-medium">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5 shrink-0"></i> Wikipedia: Pegasus (spyware) ikerketa
-                </a>
-                <a href="https://attack.mitre.org/software/S0316/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 dark:text-slate-400 hover:underline flex items-center gap-1.5">
-                  <i data-lucide="shield" class="w-3.5 h-3.5 shrink-0"></i> MITRE ATT&CK: Pegasus Mobile Fitxa
-                </a>
-              </div>
-            </div>
-
-            <!-- 6. Stealer -->
-            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-[10px] font-mono font-bold uppercase text-orange-600 dark:text-orange-400">6. Stealerrak</span>
-                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-orange-500/10 text-orange-700 dark:text-orange-300 border border-orange-500/20">Infostealer</span>
-                </div>
-                <h4 class="text-xs font-bold text-slate-900 dark:text-white mb-1">RedLine Stealer Datu-Lapurretak</h4>
-                <p class="text-[11px] text-slate-600 dark:text-slate-400 mb-3">Nabigatzaileen cookieak eta kredentzialak erauzteko erabilitako malwarearen analisia.</p>
-              </div>
-              <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/80">
-                <a href="https://attack.mitre.org/software/S0649/" target="_blank" rel="noopener noreferrer" class="text-xs text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1.5 font-medium">
-                  <i data-lucide="external-link" class="w-3.5 h-3.5 shrink-0"></i> MITRE ATT&CK: RedLine Stealer (S0649)
-                </a>
-                <a href="https://www.incibe.es/incibe-cert/alerta-temprana/bitacora-ciberseguridad/infostealers-el-mercado-de-las-credenciales" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 dark:text-slate-400 hover:underline flex items-center gap-1.5">
-                  <i data-lucide="shield" class="w-3.5 h-3.5 shrink-0"></i> INCIBE-CERT: Infostealers Analisia
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- ==================== 2., 3. ETA 4. GAIAK: COMING SOON ==================== -->
-    <section id="topic-coming-soon" class="hidden py-16 text-center">
-      <div class="max-w-xl mx-auto p-8 sm:p-12 rounded-3xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors">
-        <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
-          <i data-lucide="clock" class="w-8 h-8"></i>
-        </div>
-        
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-mono mb-4">
-          <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-          Garapen Bidean
-        </div>
-
-        <h2 id="cs-title" class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">
-          2. Gaia: Garapen Bidean
-        </h2>
-        <p id="cs-desc" class="text-sm text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
-          Gai honetako edukiak ikasturtean aurrerago txertatuko dira hiztegian.
-        </p>
-
-        <button onclick="switchTopic(1)" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-sm transition-colors shadow-lg shadow-cyan-600/20">
-          <i data-lucide="arrow-left" class="w-4 h-4"></i>
-          Itzuli 1. Gaira (Malwarea)
-        </button>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- OINEKOA -->
-  <footer class="border-t border-slate-200 dark:border-slate-800/80 bg-white dark:bg-[#070a13] py-6 mt-12 text-center text-xs text-slate-500 transition-colors">
-    <p>Segurtasun Informatikoa Hiztegia &bull; Irkus Anzola</p>
-  </footer>
-
-  <!-- JAVASCRIPT DATUAK ETA LOGIKA -->
-  <script>
-    const termsData = [
-      {
-        id: "phishing",
-        title: "Phisinga",
-        category: "Gizarte Ingeniaritza",
-        icon: "mail-warning",
-        iconColor: "text-amber-500 dark:text-amber-400 bg-amber-500/10 border-amber-500/30",
-        desc: "Entitate legitimo baten (bankua, mezularitza, posta-hornitzailea) nortasuna usurpatuz erabiltzaileari iruzur egiteko teknika da, kredentzialak edo informazio konfidentziala berak borondatez eman ditzan.",
-        pillars: [
-          { name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Biktimak bere pasahitzak eta datu pribatuak erasotzaileari ematen dizkio zuzenean." },
-          { name: "Osotasuna", status: "Arriskuan", type: "yellow", detail: "Kontuan sartzean erasotzaileak barruko datuak, fitxategiak edo ezarpenak aldatu ditzake." },
-          { name: "Eskuragarritasuna", status: "Arriskuan", type: "yellow", detail: "Erasotzaileak pasahitza aldatuz gero, biktima bere kontutik kanpo gera daiteke." },
-          { name: "Autentifikazioa", status: "Hautsita", type: "red", detail: "Baimendutako kredentzialak lapurtu eta biktima gisa baliozkotzen da sisteman." },
-          { name: "Ez-gaitetzea", status: "Arriskuan", type: "yellow", detail: "Erasotzaileak egindako ekintzak biktimaren kontu legitimoaren izenean erregistratzen dira." }
-        ],
-        realCase: {
-          title: "2016ko John Podesta & DNC auzia",
-          year: "2016",
-          victim: "John Podesta (Hillary Clintonen kanpaina-burua)",
-          summary: "Google-ren segurtasun-mezu faltsu bat jaso zuen, pasahitza berehala aldatzeko eskatuz. Esteka sakatzean, orri iruzurgile batean kredentzialak sartu zituen. Ondorioz, 60.000 mezu pribatu erauzi eta argitaratu ziren mundu osoan."
-        }
-      },
-      {
-        id: "dos",
-        title: "Biren erasoa (DoS)",
-        category: "Sare Erasoa",
-        icon: "zap-off",
-        iconColor: "text-red-500 dark:text-red-500 bg-red-500/10 border-red-600/30",
-        desc: "Zerbitzari, sare edo sistema bat eskaera masibo edo baliabide-agortzearen bidez gainezkatzen duen erasoa da, legezko erabiltzaileentzat zerbitzua erabiltezin edo eskuragaitz utziz.",
-        pillars: [
-          { name: "Konfidentzialtasuna", status: "Bermatua", type: "green", detail: "Ez du informazio pribaturik lapurtzen edo irakurtzen; helburua zerbitzua eroraraztea da." },
-          { name: "Osotasuna", status: "Bermatua", type: "green", detail: "Ez ditu datu-baseak edo fitxategiak aldatzen edo manipulatzen." },
-          { name: "Eskuragarritasuna", status: "Hautsita", type: "red", detail: "Helburu nagusia da: zerbitzaria kolapsatu egiten da eta erabiltzaileak ezin dira konektatu." },
-          { name: "Autentifikazioa", status: "Arriskuan", type: "yellow", detail: "Autentifikazio-zerbitzariak erortzen badira, inork ezin du saioa hasi." },
-          { name: "Ez-gaitetzea", status: "Bermatua", type: "green", detail: "Trafikoa botatzen den arren, ez da biktimaren identitatea ekintzetarako ordezkatzen." }
-        ],
-        realCase: {
-          title: "Dyn DNS hornitzailearen aurkako Mirai Erasoa",
-          year: "2016",
-          victim: "Dyn DNS (Twitter, Spotify, Netflix, Reddit)",
-          summary: "Mirai botnet-ak milaka IoT gailu (kamerak eta bideratzaileak) baliatu zituen Dyn azpiegiturara terabiteetako trafiko masiboa jaurtitzeko. Ondorioz, AEBetako eta Europako milioika erabiltzaile ordu luzez zerbitzurik gabe geratu ziren."
-        }
-      },
-      {
-        id: "trojan",
-        title: "Troiarra",
-        category: "Malware Mozorrotua",
-        icon: "chess-knight",
-        iconColor: "text-pink-700 dark:text-pink-400 bg-pink-700/10 border-pink-700/30",
-        desc: "Fitxategi edo programa baliagarri, kaltegabe edo desiragarri baten itxura duen programa maltzurra da (joko bat, lizentzia-pitzatzaile bat edo eguneraketa bat), baina exekutatzean sistemaren barne-kontrola erasotzaileari ematen diona.",
-        pillars: [
-          { name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Sistemako fitxategi guztiak, karpetak eta biltegiratutako informazioa bistaratzen ditu." },
-          { name: "Osotasuna", status: "Hautsita", type: "red", detail: "Sistemako fitxategiak aldatu, kode maltzur berria instalatu eta erregistroa hondatzen du." },
-          { name: "Eskuragarritasuna", status: "Arriskuan", type: "yellow", detail: "Sistemako zerbitzuak eten, baliabideak agortu edo fitxategiak blokea ditzake." },
-          { name: "Autentifikazioa", status: "Hautsita", type: "red", detail: "Erabiltzailearen baimen berberak lortzen ditu eta pribilegioak igotzeko baliatzen da." },
-          { name: "Ez-gaitetzea", status: "Arriskuan", type: "yellow", detail: "Egindako ekintza kaltegarriak baimendutako prozesu legitimoen atzean ezkutatzen dira." }
-        ],
-        realCase: {
-          title: "Zeus Trojan (Zbot) Banku-Erasoa",
-          year: "2007 - 2014",
-          victim: "Mundu osoko bankuak eta multinazionalak",
-          summary: "Dokumentu edo aplikazio arrunt baten barruan ezkutatuta sartzen zen ekipoan. Behin barruan, biktimak bankuko orrian sartzean inprimaki faltsuak tartekatzen zituen (Man-in-the-Browser) saio-hasiera lapurtzeko, ehunka milioi dolar bidegabe transferituz."
-        }
-      },
-      {
-        id: "backdoor",
-        title: "Backdoorsak (Atzeko ateak)",
-        category: "Ezkutuko Sarbidea",
-        icon: "door-open",
-        iconColor: "text-purple-500 dark:text-purple-400 bg-purple-500/10 border-purple-500/30",
-        desc: "Sistemaren ohiko autentifikazio eta segurtasun-mekanismoak guztiz saihesteko sortutako sarbide sekretu eta ezkutukoa da, erasotzaileari ekipoan nahieran sartzeko aukera mugagabea ematen diona.",
-        pillars: [
-          { name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Erasotzaileak ekipoan dagoen edozein fitxategi ezkutuan irakurri eta deskarga dezake." },
-          { name: "Osotasuna", status: "Hautsita", type: "red", detail: "Sistemaren konfigurazioak, aplikazioak eta segurtasun-politikak guztiz manipula ditzake." },
-          { name: "Eskuragarritasuna", status: "Arriskuan", type: "yellow", detail: "Zerbitzariak nahi denean berrabiarazi, itzali edo sare-konexioa moztu dezake." },
-          { name: "Autentifikazioa", status: "Hautsita", type: "red", detail: "Autentifikazio-zerbitzari guztiak saihesten ditu, pasahitzen beharrik gabe sartuz." },
-          { name: "Ez-gaitetzea", status: "Hautsita", type: "red", detail: "Sarraldiak erregistro ofizialetan ez dira agertzen edo logak ezabatzeko boterea du." }
-        ],
-        realCase: {
-          title: "SolarWinds SUNBURST Eguneraketa",
-          year: "2020",
-          victim: "AEBetako Gobernu Sailak & 18.000 erakunde",
-          summary: "SolarWinds enpresaren Orion softwarearen iturburu-kodean atzeko ate sekretu bat txertatu zuten erasotzaileek. Softwarearen eguneraketa ofizial eta sinatuaren bidez banatu zenez, milaka enpresatan sartu ziren inork susmatu gabe urruneko kontrol osoa hartuz."
-        }
-      },
-      {
-        id: "spyware",
-        title: "Spywarea",
-        category: "Espioitza Softwarea",
-        icon: "hat-glasses",
-        iconColor: "text-emerald-500 dark:text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
-        desc: "Erabiltzailearen baimenik edo jakinaren gainean egon gabe, bere jarduera digital osoa (teklatu-sakatzeak, mikrofonoa, kamera, fitxategiak eta nabigazio-historia) zelatatu eta hirugarren bati transmititzen dion software maltzurra da.",
-        pillars: [
-          { name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Ekipoan gertatzen den mugimendu pribatu bakoitza denbora errealean zelatatzen du." },
-          { name: "Osotasuna", status: "Bermatua", type: "green", detail: "Normalean ez du fitxategirik aldatzen, oharkabean eta ezkutuan jarraitu nahi baitu." },
-          { name: "Eskuragarritasuna", status: "Bermatua", type: "green", detail: "Sistemak normalean funtzionatzen jarraitzen du biktima ez dadin erasoaz jabetu." },
-          { name: "Autentifikazioa", status: "Arriskuan", type: "yellow", detail: "Zuzenean ez du aldatzen, baina teklen bidez (keylogger) pasahitz guztiak harrapatzen ditu." },
-          { name: "Ez-gaitetzea", status: "Bermatua", type: "green", detail: "Ez ditu mezuen egiletzak ordezkatzen; informazioa jasotzera mugatzen da." }
-        ],
-        realCase: {
-          title: "Pegasus (NSO Group)",
-          year: "2016 - Gaur egun",
-          victim: "Kazetariak, politikariak eta aktibistak",
-          summary: "Zero-click motako ahultasunen bidez telefono mugikorretan sartzen den spyware militarra. Biktimak ezer sakatu gabe, WhatsApp mezuak, dei grabaketak, kamera, mikrofonoa eta GPS kokapena zelatatu eta bidaltzen ditu urruneko zerbitzari batera."
-        }
-      },
-      {
-        id: "stealer",
-        title: "Stealerrak",
-        category: "Datu-Lapurretarako Malwarea",
-        icon: "hand-coins",
-        iconColor: "text-orange-500 dark:text-orange-400 bg-orange-500/10 border-orange-500/30",
-        desc: "Kredentzialak, saio-hasierako cookieak, kreditu-txartelen datuak eta kriptomoneta-zorroak azkar lapurtzeko bereziki diseinatutako malware da. Informazioa erauzi ondoren, normalean Dark Webean saldu egiten da.",
-        pillars: [
-          { name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Nabigatzaileetan eta aplikazioetan gordetako datu sekretu guztiak erauzten ditu." },
-          { name: "Osotasuna", status: "Bermatua", type: "green", detail: "Ez ditu jatorrizko datuak suntsitzen edo manipulatzen, kopiak lapurtzen ditu." },
-          { name: "Eskuragarritasuna", status: "Bermatua", type: "green", detail: "Sistema erabilgarri uzten du, biktimak bere pasahitzak berehala aldatu ez ditzan." },
-          { name: "Autentifikazioa", status: "Hautsita", type: "red", detail: "Saio-cookieak lapurtzean, MFA/2FA autentifikazio bikoitza guztiz saihesten dute." },
-          { name: "Ez-gaitetzea", status: "Arriskuan", type: "yellow", detail: "Lapurrek biktimaren saio legitimo bera erabiliz eragiketak egiten dituzte." }
-        ],
-        realCase: {
-          title: "RedLine Stealer Kanpainak",
-          year: "2020 - Gaur egun",
-          victim: "Mundu osoko milioika erabiltzaile eta enpresa-kontu",
-          summary: "Bideo-jokoen adabaki eta deskarga piraten bidez hedatzen den malwarea. Segundotan Chrome, Edge eta Firefoxeko pasahitzak eta saio-cookie aktiboak erauzten ditu; horri esker, lapurrak korporazioen barne-sareetan sartzen dira pasahitzik tekleatu gabe."
-        }
-      }
-    ];
-
-    const cardStates = {};
-    termsData.forEach(t => cardStates[t.id] = false);
-
-    let isSourcesOpen = false;
-
-    function getStatusBadge(status, type) {
-      if (type === 'red') {
-        return `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-300 border border-red-300 dark:border-red-500/40 shrink-0">🔴 ${status}</span>`;
-      } else if (type === 'yellow') {
-        return `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200 border border-amber-300 dark:border-amber-500/40 shrink-0">🟡 ${status}</span>`;
-      } else {
-        return `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40 shrink-0">🟢 ${status}</span>`;
-      }
-    }
-
-    function renderCards() {
-      const container = document.getElementById('terms-grid');
-      container.innerHTML = termsData.map(term => {
-        const isExpanded = cardStates[term.id];
-        
-        return `
-          <div id="card-${term.id}" class="card-transition flex flex-col w-full min-h-[280px] sm:min-h-[280px] rounded-2xl bg-white dark:bg-slate-900/80 border ${isExpanded ? 'border-cyan-500/60 shadow-[0_0_20px_rgba(6,182,212,0.15)] ring-1 ring-cyan-500/30' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm dark:shadow-lg'} p-5 sm:p-6 backdrop-blur-sm transition-colors">
-            
-            <div class="flex items-start justify-between gap-3 mb-3">
-              <div>
-                <span class="text-[10px] font-mono font-semibold uppercase tracking-wider text-cyan-700 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-300 dark:border-cyan-800/40">
-                  ${term.category}
-                </span>
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white mt-1.5">${term.title}</h3>
-              </div>
-              <div class="p-2.5 rounded-xl border ${term.iconColor} shrink-0 shadow-sm">
-                <i data-lucide="${term.icon}" class="w-5 h-5"></i>
-              </div>
-            </div>
-
-            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 flex-1">
-              ${term.desc}
-            </p>
-
-            <div class="pt-2 border-t border-slate-200 dark:border-slate-800/80 mt-auto">
-              <button onclick="toggleCard('${term.id}', event)" class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold flex items-center justify-between transition-all duration-200 ${isExpanded ? 'bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-500/40' : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/70 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60'}">
-                <span class="flex items-center gap-2">
-                  <i data-lucide="${isExpanded ? 'chevron-up' : 'chevron-down'}" class="w-4 h-4" ></i>
-                  ${isExpanded ? 'Ezkutatu printzipioak eta kasua' : 'Ikusi printzipioak eta benetako kasua'}
-                </span>
-                <span class="text-[10px] font-mono ${isExpanded ? 'text-cyan-700 dark:text-cyan-400' : 'text-slate-500 dark:text-slate-400'}">
-                  ${isExpanded ? 'Itxi' : 'Ireki'}
-                </span>
-              </button>
-            </div>
-
-            <div id="content-${term.id}" class="${isExpanded ? 'block' : 'hidden'} mt-5 space-y-5 pt-4 border-t border-slate-200 dark:border-slate-800/60">
-              
-              <!-- 1. Printzipioak -->
-              <div>
-                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3 flex items-center gap-1.5">
-                  <i data-lucide="layers" class="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400"></i>
-                  Segurtasun-Printzipioak:
-                </h4>
-                <div class="space-y-2">
-                  ${term.pillars.map(p => `
-                    <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 flex flex-col gap-1">
-                      <div class="flex items-center justify-between gap-2">
-                        <span class="text-xs font-semibold text-slate-800 dark:text-slate-200">${p.name}</span>${getStatusBadge(p.status, p.type)}
-                      </div>
-                      <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-snug">${p.detail}</p>
+                <!-- Logoa eta Izenburua -->
+                <div class="flex items-center gap-3 shrink-0 cursor-pointer" onclick="switchTopic('home')">
+                    <div
+                        class="p-2.5 rounded-xl bg-cyan-600/10 dark:bg-cyan-500/10 border-2 border-cyan-600/30 dark:border-cyan-500/30 text-cyan-700 dark:text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
                     </div>
-                  `).join('')}
+                    <div>
+                        <h1
+                            class="text-base sm:text-xl font-extrabold tracking-tight text-slate-950 dark:text-white flex items-center gap-2">
+                            Segurtasun Hiztegia
+                        </h1>
+                        <p class="text-xs font-semibold text-slate-600 dark:text-slate-400 hidden sm:block">IRKUS ANZOLA
+                            &bull; ASIR</p>
+                    </div>
                 </div>
-              </div>
 
-              <!-- 2. Kasu Erreala -->
-              <div class="p-4 rounded-xl bg-gradient-to-br from-cyan-50 to-slate-100 dark:from-cyan-950/40 dark:to-slate-900 border border-cyan-200 dark:border-cyan-800/40">
-                <div class="flex items-center justify-between gap-2 mb-2">
-                  <span class="text-[10px] font-mono uppercase tracking-wider font-bold text-cyan-700 dark:text-cyan-300 flex items-center gap-1.5">
-                    <i data-lucide="history" class="w-3.5 h-3.5"></i>
-                    Benetako Kasu Erreala
-                  </span>
-                  <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-100 dark:bg-cyan-950 text-cyan-800 dark:text-cyan-400 border border-cyan-300 dark:border-cyan-800/50">
-                    ${term.realCase.year}
-                  </span>
+                <!-- Menua + Modu Aldaketa -->
+                <div class="flex items-center gap-1.5 sm:gap-3">
+                    <nav class="flex items-center gap-1 sm:gap-1.5">
+                        <button onclick="switchTopic('home')" id="btn-topic-home"
+                            class="px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 flex items-center gap-1.5 bg-cyan-500/20 text-cyan-900 dark:text-cyan-300 border-2 border-cyan-500/50 shadow-sm">
+                            <i data-lucide="home" class="w-4 h-4"></i>
+                            <span>Hasiera</span>
+                        </button>
+
+                        <button onclick="switchTopic(1)" id="btn-topic-1"
+                            class="px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-slate-200 hover:bg-slate-200/80 dark:hover:bg-slate-800/60 border-2 border-transparent transition-all duration-200 flex items-center gap-1.5">
+                            <i data-lucide="skull" class="w-4 h-4"></i>
+                            <span class="hidden md:inline">1. Gaia</span>
+                        </button>
+
+                        <button onclick="switchTopic(2)" id="btn-topic-2"
+                            class="px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-slate-200 hover:bg-slate-200/80 dark:hover:bg-slate-800/60 border-2 border-transparent transition-all duration-200 flex items-center gap-1.5">
+                            <i data-lucide="network" class="w-4 h-4"></i>
+                            <span class="hidden md:inline">2. Gaia</span>
+                        </button>
+
+                        <button onclick="switchTopic(3)" id="btn-topic-3"
+                            class="px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-slate-200 hover:bg-slate-200/80 dark:hover:bg-slate-800/60 border-2 border-transparent transition-all duration-200 flex items-center gap-1.5">
+                            <i data-lucide="key" class="w-4 h-4"></i>
+                            <span class="hidden md:inline">3. Gaia</span>
+                        </button>
+
+                        <button onclick="switchTopic(4)" id="btn-topic-4"
+                            class="px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-slate-200 hover:bg-slate-200/80 dark:hover:bg-slate-800/60 border-2 border-transparent transition-all duration-200 flex items-center gap-1.5">
+                            <i data-lucide="shield" class="w-4 h-4"></i>
+                            <span class="hidden md:inline">4. Gaia</span>
+                        </button>
+                    </nav>
+
+                    <!-- Tema botoia -->
+                    <button id="theme-toggle" onclick="toggleDarkMode()" aria-label="Txandakatu gaia"
+                        class="p-2 sm:p-2.5 rounded-xl border-2 border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 hover:text-cyan-700 dark:hover:text-cyan-400 hover:border-cyan-500 transition-all shadow-sm">
+                        <i id="theme-icon" data-lucide="sun" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                    </button>
                 </div>
-                <h5 class="text-xs font-bold text-slate-900 dark:text-white mb-1">${term.realCase.title}</h5>
-                <p class="text-[11px] text-cyan-900 dark:text-cyan-200/70 mb-2"><strong>Biktima:</strong> ${term.realCase.victim}</p>
-                <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${term.realCase.summary}</p>
-              </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- EDUKI NAGUSIA -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+        <!-- ==================== HASIERA ORRIA ==================== -->
+        <section id="topic-home-content" class="space-y-8">
+
+            <!-- Hero Section Hasiera -->
+            <div
+                class="relative overflow-hidden rounded-2xl bg-white dark:bg-[#0c1322] border-2 border-slate-300 dark:border-slate-800 p-5 sm:p-7 shadow-md dark:shadow-none transition-all">
+
+                <div
+                    class="absolute -right-16 -top-16 w-64 h-64 bg-cyan-500/15 dark:bg-cyan-500/10 rounded-full blur-3xl pointer-events-none">
+                </div>
+                <div
+                    class="absolute -left-16 -bottom-16 w-64 h-64 bg-indigo-500/15 dark:bg-indigo-500/10 rounded-full blur-3xl pointer-events-none">
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-7">
+
+                    <!-- Texto maximizado en ancho hacia la derecha -->
+                    <div class="flex-1 w-full text-left">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/90 border border-cyan-300 dark:border-cyan-800 text-cyan-900 dark:text-cyan-300 text-xs font-mono font-bold mb-2.5 shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse"></span>
+                            Segurtasun Informatikoa &bull; Hiztegi Zibernetikoa
+                        </div>
+
+                        <h2
+                            class="text-2xl sm:text-4xl font-extrabold text-slate-950 dark:text-white tracking-tight leading-snug">
+                            Zibersegurtasunaren <span class="text-cyan-700 dark:text-cyan-400">Printzipioak</span> eta
+                            Mehatxuak
+                        </h2>
+
+                        <p
+                            class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mt-2.5 leading-relaxed font-normal">
+                            Ongi etorri Segurtasun Informatikoaren erreferentzia-hiztegi teknikora. Webgune honek eraso
+                            digitalak, mehatxu motak eta segurtasun-printzipioen analisia biltzen ditu, kasu erreal
+                            historikoekin eta balorazio kritikoarekin.
+                        </p>
+
+                        <div
+                            class="mt-4 pt-3.5 border-t-2 border-slate-200 dark:border-slate-800 flex flex-wrap items-center gap-y-1.5 gap-x-3.5 text-xs font-medium text-slate-600 dark:text-slate-400">
+                            <span class="flex items-center gap-1.5">
+                                <i data-lucide="user" class="w-3.5 h-3.5 text-cyan-700 dark:text-cyan-400"></i>
+                                <strong>Egilea:</strong> Irkus Anzola
+                            </span>
+                            <span class="hidden sm:inline text-slate-400 dark:text-slate-600">&bull;</span>
+                            <span class="flex items-center gap-1.5">
+                                <i data-lucide="graduation-cap"
+                                    class="w-3.5 h-3.5 text-cyan-700 dark:text-cyan-400"></i>
+                                <strong>Zikloa:</strong> ASIR 2 (CIFP Txurdinaga LHII)
+                            </span>
+                            <span class="hidden sm:inline text-slate-400 dark:text-slate-600">&bull;</span>
+                            <span class="flex items-center gap-1.5">
+                                <i data-lucide="layers" class="w-3.5 h-3.5 text-cyan-700 dark:text-cyan-400"></i>
+                                <strong>Terminoak:</strong> 9 azterketa
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Icono más compacto para no ocupar altura -->
+                    <div class="relative shrink-0 flex items-center justify-center">
+                        <div class="absolute w-28 h-28 rounded-full bg-cyan-500/20 blur-xl pointer-events-none"></div>
+
+                        <div
+                            class="animate-float-shield relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/95 to-slate-100/95 dark:from-slate-900/90 dark:to-slate-950/90 border-2 border-slate-300 dark:border-cyan-500/30 shadow-lg dark:shadow-[0_0_25px_rgba(6,182,212,0.18)] backdrop-blur-md flex flex-col items-center justify-center">
+                            <div
+                                class="relative p-2.5 sm:p-3 rounded-xl bg-cyan-500/15 dark:bg-cyan-500/10 border-2 border-cyan-600/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-400 shadow-inner">
+                                <i data-lucide="shield-check" class="w-12 h-12 sm:w-14 sm:h-14 stroke-[1.6]"></i>
+                                <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span
+                                        class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-white dark:border-slate-900"></span>
+                                </span>
+                            </div>
+
+                            <div class="mt-2 flex items-center">
+                                <span
+                                    class="text-[9px] font-mono font-bold tracking-widest uppercase text-slate-800 dark:text-cyan-300 bg-slate-200/80 dark:bg-cyan-950/80 px-2 py-0.5 rounded border border-slate-300 dark:border-cyan-800/60">
+                                    SEC &bull; 2.0
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SEMAFOROAREN GIDA OSOA -->
+            <div
+                class="rounded-2xl bg-white dark:bg-slate-900/90 border-2 border-slate-300 dark:border-slate-800 p-5 sm:p-7 shadow-md dark:shadow-none transition-colors space-y-5">
+
+                <div class="flex items-center gap-3">
+                    <div
+                        class="p-2 rounded-xl bg-amber-500/15 border-2 border-amber-500/40 text-amber-700 dark:text-amber-400">
+                        <i data-lucide="traffic-cone" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-slate-950 dark:text-white">
+                            Segurtasun-Printzipioen Semaforoa
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-400 font-medium">
+                            Hiztegi honetako kontzeptu bakoitza oinarrizko bost segurtasun-printzipio hauen arabera
+                            ebaluatzen da. Kolore-kodeak eraso edo mehatxu batek printzipio bakoitzean eragiten duen
+                            kalte maila zehatza adierazten du:
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div
+                        class="p-4 rounded-xl bg-red-50/80 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-500/40 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-extrabold bg-red-200 dark:bg-red-500/30 text-red-900 dark:text-red-200 border border-red-400 dark:border-red-500/50">
+                                🔴 Hautsita
+                            </span>
+                            <span class="text-xs font-mono font-bold text-red-800 dark:text-red-400">Kritikoa</span>
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-slate-950 dark:text-white mb-1">Printzipioa guztiz
+                            urratua</h4>
+                        <p class="text-xs text-slate-800 dark:text-slate-300 leading-relaxed font-normal">
+                            Erasoak zutabe hau zuzenean suntsitu edo baliogabetzen du. Adibidez: pasahitzak lapurtuta
+                            konfidentzialtasuna hausten da, edo zerbitzaria erorita eskuragarritasuna galtzen da.
+                        </p>
+                    </div>
+
+                    <div
+                        class="p-4 rounded-xl bg-amber-50/80 dark:bg-amber-950/20 border-2 border-amber-300 dark:border-amber-500/40 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-extrabold bg-amber-200 dark:bg-amber-500/30 text-amber-900 dark:text-amber-200 border border-amber-400 dark:border-amber-500/50">
+                                🟡 Arriskuan
+                            </span>
+                            <span
+                                class="text-xs font-mono font-bold text-amber-800 dark:text-amber-400">Zeharkakoa</span>
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-slate-950 dark:text-white mb-1">Mehatxupean edo
+                            kalteturik</h4>
+                        <p class="text-xs text-slate-800 dark:text-slate-300 leading-relaxed font-normal">
+                            Ez da erasoaren jomuga nagusia, baina ondorio kolateral moduan printzipioa kolokan geratzen
+                            da edo arrisku handian jartzen da.
+                        </p>
+                    </div>
+
+                    <div
+                        class="p-4 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/20 border-2 border-emerald-300 dark:border-emerald-500/40 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-extrabold bg-emerald-200 dark:bg-emerald-500/30 text-emerald-900 dark:text-emerald-200 border border-emerald-400 dark:border-emerald-500/50">
+                                🟢 Bermatua
+                            </span>
+                            <span
+                                class="text-xs font-mono font-bold text-emerald-800 dark:text-emerald-400">Segurua</span>
+                        </div>
+                        <h4 class="text-xs sm:text-sm font-bold text-slate-950 dark:text-white mb-1">Printzipioa osorik
+                            mantentzen da</h4>
+                        <p class="text-xs text-slate-800 dark:text-slate-300 leading-relaxed font-normal">
+                            Eraso mota honek ez du zutabe hau kaltetzen ezta mehatxatzen ere. Bere horretan seguru eta
+                            fidagarri mantentzen jarraitzen du.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t-2 border-slate-200 dark:border-slate-800">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2.5">
+                        Aztertzen diren 5 Segurtasun-Printzipioak:
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 text-xs">
+                        <div
+                            class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span class="font-bold text-slate-950 dark:text-white block mb-0.5">1.
+                                Konfidentzialtasuna</span>
+                            <span class="text-slate-600 dark:text-slate-400 text-[11px]">Baimendu gabeko inork ezin du
+                                ikusi.</span>
+                        </div>
+                        <div
+                            class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span class="font-bold text-slate-950 dark:text-white block mb-0.5">2. Osotasuna</span>
+                            <span class="text-slate-600 dark:text-slate-400 text-[11px]">Datuak ezin dira aldatu.</span>
+                        </div>
+                        <div
+                            class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span class="font-bold text-slate-950 dark:text-white block mb-0.5">3.
+                                Eskuragarritasuna</span>
+                            <span class="text-slate-600 dark:text-slate-400 text-[11px]">Zerbitzua beti erabilgarri
+                                egotea.</span>
+                        </div>
+                        <div
+                            class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span class="font-bold text-slate-950 dark:text-white block mb-0.5">4.
+                                Autentifikazioa</span>
+                            <span class="text-slate-600 dark:text-slate-400 text-[11px]">Nortasuna frogatzea.</span>
+                        </div>
+                        <div
+                            class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span class="font-bold text-slate-950 dark:text-white block mb-0.5">5. Ez-gaitetzea</span>
+                            <span class="text-slate-600 dark:text-slate-400 text-[11px]">Egiletza ezin ukatzea.</span>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
-          </div>
-        `;
-      }).join('');
+            <!-- SARBIDE BIZKORRA -->
+            <div>
+                <h3
+                    class="text-base sm:text-lg font-bold text-slate-950 dark:text-white mb-3.5 flex items-center gap-2">
+                    <i data-lucide="compass" class="w-4 h-4 text-cyan-600 dark:text-cyan-400"></i>
+                    Arakatu Hiztegiaren Gaiak:
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-      lucide.createIcons();
-    }
+                    <div onclick="switchTopic(1)"
+                        class="group cursor-pointer p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-md hover:shadow-lg transition-all">
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span
+                                class="text-[11px] font-mono font-bold uppercase text-cyan-700 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-300 dark:border-cyan-800">
+                                1. Gaia &bull; 6 Kontzeptu
+                            </span>
+                            <i data-lucide="arrow-right"
+                                class="w-4 h-4 text-slate-400 group-hover:text-cyan-600 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-950 dark:text-white mb-1.5">Malware eta Eraso Motak</h4>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 mb-3">
+                            Phishing, DoS, Troiarrak, Atzeko Ateak (Backdoors), Spywarea eta Stealerrak.
+                        </p>
+                        <span class="text-xs font-bold text-cyan-700 dark:text-cyan-400 flex items-center gap-1">
+                            Ireki 1. Gaiaren hiztegia &rarr;
+                        </span>
+                    </div>
 
-    function toggleCard(id, event) {
-      if (event) event.stopPropagation();
-      cardStates[id] = !cardStates[id];
-      renderCards();
-    }
+                    <div onclick="switchTopic(2)"
+                        class="group cursor-pointer p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-md hover:shadow-lg transition-all">
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span
+                                class="text-[11px] font-mono font-bold uppercase text-indigo-700 dark:text-indigo-400 bg-indigo-100 dark:bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-300 dark:border-indigo-800">
+                                2. Gaia &bull; 3 Kontzeptu Berri
+                            </span>
+                            <i data-lucide="arrow-right"
+                                class="w-4 h-4 text-slate-400 group-hover:text-cyan-600 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-950 dark:text-white mb-1.5">Mehatxu Aurreratuak eta Sare
+                            Erasoak</h4>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 mb-3">
+                            Koobface (harra sare sozialetan), Botnet (zombi armadak) eta Indar gordineko erasoa
+                            (brute-force).
+                        </p>
+                        <span class="text-xs font-bold text-indigo-700 dark:text-indigo-400 flex items-center gap-1">
+                            Ireki 2. Gaiaren hiztegia &rarr;
+                        </span>
+                    </div>
 
-    function toggleSources() {
-      isSourcesOpen = !isSourcesOpen;
-      const content = document.getElementById('sources-content');
-      const label = document.getElementById('sources-btn-label');
-      const chevron = document.getElementById('sources-chevron');
+                </div>
+            </div>
 
-      if (isSourcesOpen) {
-        content.classList.remove('hidden');
-        label.textContent = 'Tolestu iturriak';
-        chevron.classList.add('rotate-180');
-      } else {
-        content.classList.add('hidden');
-        label.textContent = 'Zabaldu iturriak';
-        chevron.classList.remove('rotate-180');
-      }
-      lucide.createIcons();
-    }
+        </section>
 
-    function switchTopic(topicNum) {
-      const topic1Sec = document.getElementById('topic-1-content');
-      const csSec = document.getElementById('topic-coming-soon');
-      
-      const csTitle = document.getElementById('cs-title');
-      const csDesc = document.getElementById('cs-desc');
 
-      for (let i = 1; i <= 4; i++) {
-        const btn = document.getElementById(`btn-topic-${i}`);
-        btn.className = "px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 border border-transparent transition-all duration-200 flex items-center gap-1.5 sm:gap-2";
-      }
+        <!-- ==================== 1. GAIA (HEADER COMPACTO) ==================== -->
+        <section id="topic-1-content" class="hidden space-y-7">
 
-      const activeBtn = document.getElementById(`btn-topic-${topicNum}`);
-      activeBtn.className = "px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 sm:gap-2 bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/40 shadow-sm";
+            <div
+                class="relative overflow-hidden rounded-2xl bg-white dark:bg-[#0c1322] border-2 border-slate-300 dark:border-slate-800 p-5 sm:p-6 shadow-md dark:shadow-none transition-colors">
 
-      if (topicNum === 1) {
-        topic1Sec.classList.remove('hidden');
-        csSec.classList.add('hidden');
-      } else {
-        topic1Sec.classList.add('hidden');
-        csSec.classList.remove('hidden');
+                <div
+                    class="absolute -right-16 -top-16 w-64 h-64 bg-cyan-500/15 dark:bg-cyan-500/10 rounded-full blur-3xl pointer-events-none">
+                </div>
 
-        if (topicNum === 2) {
-          csTitle.textContent = "2. Gaia: Garapen Bidean";
-          csDesc.textContent = "Gai honetako edukiak ikasturtean aurrerago txertatuko dira hiztegian.";
-        } else if (topicNum === 3) {
-          csTitle.textContent = "3. Gaia: Garapen Bidean";
-          csDesc.textContent = "Gai honetako edukiak ikasturtean aurrerago txertatuko dira hiztegian.";
-        } else if (topicNum === 4) {
-          csTitle.textContent = "4. Gaia: Garapen Bidean";
-          csDesc.textContent = "Gai honetako edukiak ikasturtean aurrerago txertatuko dira hiztegian.";
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-7">
+
+                    <!-- Texto maximizado en ancho hacia la derecha -->
+                    <div class="flex-1 w-full text-left">
+                        <div
+                            class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-300 dark:border-cyan-800 text-cyan-900 dark:text-cyan-300 text-xs font-mono font-bold mb-2">
+                            <span class="w-2 h-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse"></span>
+                            1. Gaia &bull; Hiztegi Teknikoa
+                        </div>
+                        <h2 class="text-xl sm:text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight">
+                            Malware eta Eraso Motak
+                        </h2>
+                        <p
+                            class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mt-2 leading-relaxed font-normal">
+                            Zibersegurtasuneko sei kontzeptu gako: definizioak, segurtasun-printzipioetan duten eragina
+                            eta mundu errealeko kasu historikoak.
+                        </p>
+                    </div>
+
+                    <!-- Icono Skull compacto -->
+                    <div class="relative shrink-0 flex items-center justify-center">
+                        <div class="absolute w-28 h-28 rounded-full bg-cyan-500/20 blur-xl pointer-events-none"></div>
+
+                        <div
+                            class="animate-float-shield relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/95 to-slate-100/95 dark:from-slate-900/90 dark:to-slate-950/90 border-2 border-slate-300 dark:border-cyan-500/30 shadow-lg dark:shadow-[0_0_25px_rgba(6,182,212,0.18)] backdrop-blur-md flex flex-col items-center justify-center">
+
+                            <div
+                                class="relative p-2.5 sm:p-3 rounded-xl bg-cyan-500/15 dark:bg-cyan-500/10 border-2 border-cyan-600/30 dark:border-cyan-400/30 text-cyan-700 dark:text-cyan-400 shadow-inner">
+                                <i data-lucide="skull" class="w-12 h-12 sm:w-14 sm:h-14 stroke-[1.6]"></i>
+
+                                <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                                    <span
+                                        class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500 border border-white dark:border-slate-900"></span>
+                                </span>
+                            </div>
+
+                            <div class="mt-2 flex items-center">
+                                <span
+                                    class="text-[9px] font-mono font-bold tracking-widest uppercase text-slate-800 dark:text-cyan-300 bg-slate-200/80 dark:bg-cyan-950/80 px-2 py-0.5 rounded border border-slate-300 dark:border-cyan-800/60">
+                                    MALWARE
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TXARTELEN SAREA (1. GAIA) -->
+            <div id="terms-grid-1" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+            </div>
+
+            <!-- HAUSNARKETA ETA BALORAZIO KRITIKOA 1. GAIA -->
+            <div
+                class="rounded-2xl bg-white dark:bg-slate-900/90 border-2 border-slate-300 dark:border-slate-800 p-5 sm:p-7 shadow-md dark:shadow-none transition-colors">
+                <div class="flex items-center gap-3 mb-3.5">
+                    <div
+                        class="p-2 rounded-xl bg-amber-500/15 border-2 border-amber-500/40 text-amber-700 dark:text-amber-400">
+                        <i data-lucide="message-square-quote" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3
+                            class="text-base sm:text-lg font-extrabold text-slate-950 dark:text-white flex items-center gap-2">
+                            Hausnarketa eta Balorazio Kritiko Globala
+                            <span
+                                class="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-amber-200 dark:bg-amber-950 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+                                1. Gaia
+                            </span>
+                        </h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400">Malware eta erasoen bilakaerari buruzko
+                            ikuspegi profesionala</p>
+                    </div>
+                </div>
+
+                <div
+                    class="space-y-3.5 text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed font-normal">
+                    <p>
+                        Lehen gai honetan aztertutako sei mehatxuek argi erakusten dute zibersegurtasunaren paradigma
+                        guztiz aldatu dela. Antzina birusen helburu nagusia sistemak hondatzea edo fitxategiak ezabatzea
+                        bazen ere, gaur egungo erasoek mozkin ekonomiko zuzena, isilpeko espioitza edo zerbitzuen
+                        kolapso estrategikoa bilatzen dute.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+                        <div
+                            class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span
+                                class="text-xs font-bold text-slate-950 dark:text-white block mb-1 flex items-center gap-1.5">
+                                <i data-lucide="user-x" class="w-4 h-4 text-amber-600 dark:text-amber-400"></i> Giza
+                                Faktorea
+                            </span>
+                            <p class="text-xs text-slate-700 dark:text-slate-400 leading-normal">
+                                Phishing-ak agerian uzten du teknologia bezain garrantzitsua dela erabiltzaileen
+                                heziketa; pertsona da sarritan lehen atea.
+                            </p>
+                        </div>
+                        <div
+                            class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span
+                                class="text-xs font-bold text-slate-950 dark:text-white block mb-1 flex items-center gap-1.5">
+                                <i data-lucide="shield-alert" class="w-4 h-4 text-cyan-600 dark:text-cyan-400"></i>
+                                Ezkutuko Mehatxuak
+                            </span>
+                            <p class="text-xs text-slate-700 dark:text-slate-400 leading-normal">
+                                Stealer, Spyware eta Atzeko Ateen helburua oharkabean pasatzea da, saio-cookieak eta
+                                kredentzialak lapurtuz 2FA babesak saihesteko.
+                            </p>
+                        </div>
+                        <div
+                            class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span
+                                class="text-xs font-bold text-slate-950 dark:text-white block mb-1 flex items-center gap-1.5">
+                                <i data-lucide="server" class="w-4 h-4 text-red-600 dark:text-red-400"></i> Defentsa
+                                Proaktiboa
+                            </span>
+                            <p class="text-xs text-slate-700 dark:text-slate-400 leading-normal">
+                                ASIR administratzaile gisa, ezinbestekoa da Zero Trust arkitektura ezartzea: baimen
+                                minimoak eman eta sareak zorrotz segmentatu.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESPLEGABLE DE FUENTES 1. GAIA -->
+            <div
+                class="rounded-2xl bg-white dark:bg-slate-900/90 border-2 border-slate-300 dark:border-slate-800 shadow-md dark:shadow-none transition-colors overflow-hidden">
+                <button onclick="toggleSources(1)"
+                    class="w-full p-5 text-left flex items-center justify-between hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="p-2 rounded-xl bg-cyan-600/15 border-2 border-cyan-600/30 text-cyan-700 dark:text-cyan-400">
+                            <i data-lucide="book-marked" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3
+                                class="text-sm sm:text-base font-bold text-slate-950 dark:text-white flex items-center gap-2">
+                                1. Gaiaren Iturriak eta Erreferentzia Egiaztatuak
+                            </h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-400">MITRE ATT&CK eta Wikipedia esteka
+                                zuzenak</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-cyan-700 dark:text-cyan-400 text-xs sm:text-sm font-bold">
+                        <span id="sources-btn-label-1">Zabaldu iturriak</span>
+                        <i id="sources-chevron-1" data-lucide="chevron-down"
+                            class="w-4 h-4 transition-transform duration-300"></i>
+                    </div>
+                </button>
+
+                <div id="sources-content-1"
+                    class="hidden border-t-2 border-slate-300 dark:border-slate-800 p-5 space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                        <div
+                            class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800">
+                            <h4 class="text-xs font-bold text-slate-950 dark:text-white mb-1">Phishing &bull; Podesta
+                                Emails</h4>
+                            <a href="https://en.wikipedia.org/wiki/Podesta_emails" target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-xs text-cyan-700 dark:text-cyan-400 font-semibold hover:underline flex items-center gap-1">
+                                <i data-lucide="external-link" class="w-3 h-3"></i> Wikipedia: Podesta emails
+                            </a>
+                        </div>
+                        <div
+                            class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800">
+                            <h4 class="text-xs font-bold text-slate-950 dark:text-white mb-1">DoS &bull; 2016 Dyn Attack
+                            </h4>
+                            <a href="https://en.wikipedia.org/wiki/2016_Dyn_cyberattack" target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-xs text-cyan-700 dark:text-cyan-400 font-semibold hover:underline flex items-center gap-1">
+                                <i data-lucide="external-link" class="w-3 h-3"></i> Wikipedia: Dyn Attack (Mirai)
+                            </a>
+                        </div>
+                        <div
+                            class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800">
+                            <h4 class="text-xs font-bold text-slate-950 dark:text-white mb-1">Trojan &bull; Zeus Botnet
+                            </h4>
+                            <a href="https://attack.mitre.org/software/S0118/" target="_blank" rel="noopener noreferrer"
+                                class="text-xs text-cyan-700 dark:text-cyan-400 font-semibold hover:underline flex items-center gap-1">
+                                <i data-lucide="external-link" class="w-3 h-3"></i> MITRE ATT&CK: Zeus (S0118)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ==================== 2. GAIA (HEADER COMPACTO) ==================== -->
+        <section id="topic-2-content" class="hidden space-y-7">
+
+            <div
+                class="relative overflow-hidden rounded-2xl bg-white dark:bg-[#0c1322] border-2 border-slate-300 dark:border-slate-800 p-5 sm:p-6 shadow-md dark:shadow-none transition-colors">
+
+                <div
+                    class="absolute -right-16 -top-16 w-64 h-64 bg-indigo-500/15 dark:bg-indigo-500/10 rounded-full blur-3xl pointer-events-none">
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-7">
+
+                    <!-- Texto maximizado en ancho hacia la derecha -->
+                    <div class="flex-1 w-full text-left">
+                        <div
+                            class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/80 border border-indigo-300 dark:border-indigo-800 text-indigo-900 dark:text-indigo-300 text-xs font-mono font-bold mb-2">
+                            <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-pulse"></span>
+                            2. Gaia &bull; Sare-Mehatxuak eta Kredentzial-Erasoak
+                        </div>
+                        <h2 class="text-xl sm:text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight">
+                            Koobface, Botnet-ak eta Indar Gordinaren Erasoak
+                        </h2>
+                        <p
+                            class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mt-2 leading-relaxed font-normal">
+                            Sare sozialetan hedatutako harrak, milaka gailu koordinatzen dituzten zombi-armadak eta
+                            autentifikazio-zerbitzarien aurkako eraso masiboak.
+                        </p>
+                    </div>
+
+                    <!-- Icono Network compacto -->
+                    <div class="relative shrink-0 flex items-center justify-center">
+                        <div class="absolute w-28 h-28 rounded-full bg-indigo-500/20 blur-xl pointer-events-none"></div>
+
+                        <div
+                            class="animate-float-shield relative p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-white/95 to-slate-100/95 dark:from-slate-900/90 dark:to-slate-950/90 border-2 border-slate-300 dark:border-indigo-500/30 shadow-lg dark:shadow-[0_0_25px_rgba(99,102,241,0.18)] backdrop-blur-md flex flex-col items-center justify-center">
+
+                            <div
+                                class="relative p-2.5 sm:p-3 rounded-xl bg-indigo-500/15 dark:bg-indigo-500/10 border-2 border-indigo-600/30 dark:border-indigo-400/30 text-indigo-700 dark:text-indigo-400 shadow-inner">
+                                <i data-lucide="network" class="w-12 h-12 sm:w-14 sm:h-14 stroke-[1.6]"></i>
+
+                                <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                                    <span
+                                        class="relative inline-flex rounded-full h-3 w-3 bg-indigo-500 border border-white dark:border-slate-900"></span>
+                                </span>
+                            </div>
+
+                            <div class="mt-2 flex items-center">
+                                <span
+                                    class="text-[9px] font-mono font-bold tracking-widest uppercase text-slate-800 dark:text-indigo-300 bg-slate-200/80 dark:bg-indigo-950/80 px-2 py-0.5 rounded border border-slate-300 dark:border-indigo-800/60">
+                                    NETWORK
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TXARTELEN SAREA (2. GAIA) -->
+            <div id="terms-grid-2" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+            </div>
+
+            <!-- HAUSNARKETA ETA BALORAZIO KRITIKOA 2. GAIA -->
+            <div
+                class="rounded-2xl bg-white dark:bg-slate-900/90 border-2 border-slate-300 dark:border-slate-800 p-5 sm:p-7 shadow-md dark:shadow-none transition-colors">
+                <div class="flex items-center gap-3 mb-3.5">
+                    <div
+                        class="p-2 rounded-xl bg-indigo-500/15 border-2 border-indigo-500/40 text-indigo-700 dark:text-indigo-400">
+                        <i data-lucide="message-square-quote" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3
+                            class="text-base sm:text-lg font-extrabold text-slate-950 dark:text-white flex items-center gap-2">
+                            Hausnarketa eta Balorazio Kritiko Globala
+                            <span
+                                class="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-indigo-200 dark:bg-indigo-950 text-indigo-900 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-800">
+                                2. Gaia
+                            </span>
+                        </h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400">Automatizazioaren eta gailu-konexio
+                            masiboaren arriskuak</p>
+                    </div>
+                </div>
+
+                <div
+                    class="space-y-3.5 text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed font-normal">
+                    <p>
+                        Bigarren gai honek argi erakusten du nola erasotzaileek baliabideen biderkatzea eta
+                        automatizazioa ustiatzen duten. Botnet batek milioika ekipo neutraliza ditzake urruneko agindu
+                        bakar batekin, eta indar gordineko tresnek (Hydra adibidez) segundoko milaka kredentzial proba
+                        ditzakete sistema batean sartu arte.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+                        <div
+                            class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span
+                                class="text-xs font-bold text-slate-950 dark:text-white block mb-1 flex items-center gap-1.5">
+                                <i data-lucide="share-2" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i>
+                                Konfiantza Kateak (Koobface)
+                            </span>
+                            <p class="text-xs text-slate-700 dark:text-slate-400 leading-normal">
+                                Lagun baten kontua konprometituta dagoenean sare sozialetan mezu faltsua fidagarria dela
+                                sinesten dugu. Horixe da harren elikagai nagusia.
+                            </p>
+                        </div>
+                        <div
+                            class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span
+                                class="text-xs font-bold text-slate-950 dark:text-white block mb-1 flex items-center gap-1.5">
+                                <i data-lucide="cpu" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i> Botnet-ak
+                                eta IoT
+                            </span>
+                            <p class="text-xs text-slate-700 dark:text-slate-400 leading-normal">
+                                Pasahitz lehenetsiak dituzten milioika router eta kamera ahul erraz bahitzen dira DDoS
+                                eraso masiboak jaurtitzeko.
+                            </p>
+                        </div>
+                        <div
+                            class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800">
+                            <span
+                                class="text-xs font-bold text-slate-950 dark:text-white block mb-1 flex items-center gap-1.5">
+                                <i data-lucide="lock" class="w-4 h-4 text-red-600 dark:text-red-400"></i> Autentifikazio
+                                sendoa
+                            </span>
+                            <p class="text-xs text-slate-700 dark:text-slate-400 leading-normal">
+                                Indar gordinari aurre egiteko ez da nahikoa pasahitz luze bat: Fail2ban, saio-mugak eta
+                                derrigorrezko 2FA (MFA) ezinbestekoak dira.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ==================== 3. ETA 4. GAIAK (COMING SOON) ==================== -->
+        <section id="topic-coming-soon" class="hidden py-12 text-center">
+            <div
+                class="max-w-xl mx-auto p-6 sm:p-10 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-800 shadow-xl relative overflow-hidden transition-colors">
+
+                <div id="cs-icon-wrapper"
+                    class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-cyan-500/15 border-2 border-cyan-500/40 flex items-center justify-center text-cyan-700 dark:text-cyan-400 shadow-inner">
+                    <i id="cs-icon" data-lucide="clock" class="w-8 h-8 stroke-[1.6]"></i>
+                </div>
+
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 text-xs font-mono font-bold mb-3">
+                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                    Garapen Bidean
+                </div>
+
+                <h2 id="cs-title" class="text-xl sm:text-2xl font-extrabold text-slate-950 dark:text-white mb-2">
+                    Gai hau laster egongo da eskuragarri
+                </h2>
+                <p id="cs-desc"
+                    class="text-xs sm:text-sm text-slate-700 dark:text-slate-400 mb-6 leading-relaxed font-normal">
+                    Gai honetako edukiak eta segurtasun-terminoak ikasturtean zehar txertatuko dira hiztegi digitalean.
+                </p>
+
+                <button onclick="switchTopic('home')"
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-700 hover:bg-cyan-600 text-white font-bold text-xs sm:text-sm transition-colors shadow-lg">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    Hasierako Orrialdera itzuli
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- OINEKOA -->
+    <footer
+        class="border-t-2 border-slate-300 dark:border-slate-800 bg-white dark:bg-[#070a13] py-6 text-center text-xs font-medium text-slate-600 dark:text-slate-400 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2.5">
+            <p>Segurtasun Informatikoaren Hiztegi Digitala &bull; CIFP Txurdinaga LHII</p>
+            <p class="font-bold text-slate-800 dark:text-slate-300">Egilea: Irkus Anzola &bull; ASIR 2</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT DATUAK ETA LOGIKA -->
+    <script>
+        const topic1Terms = [
+            {
+                id: "phishing",
+                title: "Phisinga",
+                category: "Gizarte Ingeniaritza",
+                icon: "mail-warning",
+                iconColor: "text-amber-700 dark:text-amber-400 bg-amber-100 dark:bg-amber-500/15 border-amber-300 dark:border-amber-500/30",
+                desc: "Entitate legitimo baten (bankua, posta-zerbitzua) nortasuna usurpatuz erabiltzaileari iruzur egiteko teknika da, kredentzialak edo informazio konfidentziala berak borondatez eman ditzan.",
+                pillars: [
+                    {name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Biktimak bere pasahitzak eta datu pribatuak erasotzaileari ematen dizkio zuzenean."},
+                    {name: "Osotasuna", status: "Arriskuan", type: "yellow", detail: "Kontuan sartzean erasotzaileak barruko datuak, fitxategiak edo ezarpenak aldatu ditzake."},
+                    {name: "Eskuragarritasuna", status: "Arriskuan", type: "yellow", detail: "Erasotzaileak pasahitza aldatuz gero, biktima bere kontutik kanpo gera daiteke."},
+                    {name: "Autentifikazioa", status: "Hautsita", type: "red", detail: "Baimendutako kredentzialak lapurtu eta biktima gisa baliozkotzen da sisteman."},
+                    {name: "Ez-gaitetzea", status: "Arriskuan", type: "yellow", detail: "Erasotzaileak egindako ekintzak biktimaren kontu legitimoaren izenean erregistratzen dira."}
+                ],
+                realCase: {
+                    title: "2016ko John Podesta & DNC auzia",
+                    year: "2016",
+                    victim: "John Podesta (Hillary Clintonen kanpaina-burua)",
+                    summary: "Google-ren segurtasun-mezu faltsu bat jaso zuen, pasahitza berehala aldatzeko eskatuz. Esteka sakatzean, orri iruzurgile batean kredentzialak sartu zituen. Ondorioz, 60.000 mezu pribatu erauzi eta argitaratu ziren mundu osoan."
+                }
+            },
+            {
+                id: "dos",
+                title: "Biren erasoa (DoS)",
+                category: "Sare Erasoa",
+                icon: "zap-off",
+                iconColor: "text-red-700 dark:text-red-400 bg-red-100 dark:bg-red-500/15 border-red-300 dark:border-red-500/30",
+                desc: "Zerbitzari, sare edo sistema bat eskaera masibo edo baliabide-agortzearen bidez gainezkatzen duen erasoa da, legezko erabiltzaileentzat zerbitzua erabiltezin edo eskuragaitz utziz.",
+                pillars: [
+                    {name: "Konfidentzialtasuna", status: "Bermatua", type: "green", detail: "Ez du informazio pribaturik lapurtzen edo irakurtzen; helburua zerbitzua eroraraztea da."},
+                    {name: "Osotasuna", status: "Bermatua", type: "green", detail: "Ez ditu datu-baseak edo fitxategiak aldatzen edo manipulatzen."},
+                    {name: "Eskuragarritasuna", status: "Hautsita", type: "red", detail: "Helburu nagusia da: zerbitzaria kolapsatu egiten da eta erabiltzaileak ezin dira konektatu."},
+                    {name: "Autentifikazioa", status: "Arriskuan", type: "yellow", detail: "Autentifikazio-zerbitzariak erortzen badira, inork ezin du saioa hasi."},
+                    {name: "Ez-gaitetzea", status: "Bermatua", type: "green", detail: "Trafikoa botatzen den arren, ez da biktimaren identitatea ekintzetarako ordezkatzen."}
+                ],
+                realCase: {
+                    title: "Dyn DNS hornitzailearen aurkako Mirai Erasoa",
+                    year: "2016",
+                    victim: "Dyn DNS (Twitter, Spotify, Netflix, Reddit)",
+                    summary: "Mirai botnet-ak milaka IoT gailu (kamerak eta bideratzaileak) baliatu zituen Dyn azpiegiturara terabiteetako trafiko masiboa jaurtitzeko. Ondorioz, AEBetako eta Europako milioika erabiltzaile ordu luzez zerbitzurik gabe geratu ziren."
+                }
+            },
+            {
+                id: "trojan",
+                title: "Troiarra",
+                category: "Malware Mozorrotua",
+                icon: "chess-knight",
+                iconColor: "text-pink-700 dark:text-pink-400 bg-pink-100 dark:bg-pink-500/15 border-pink-300 dark:border-pink-500/30",
+                desc: "Fitxategi edo programa baliagarri baten itxura duen programa maltzurra da (joko bat, kode irekiko tresna bat), baina exekutatzean sistemaren barne-kontrola erasotzaileari ematen diona.",
+                pillars: [
+                    {name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Sistemako fitxategi guztiak, karpetak eta biltegiratutako informazioa bistaratzen ditu."},
+                    {name: "Osotasuna", status: "Hautsita", type: "red", detail: "Sistemako fitxategiak aldatu, kode maltzur berria instalatu eta erregistroa hondatzen du."},
+                    {name: "Eskuragarritasuna", status: "Arriskuan", type: "yellow", detail: "Sistemako zerbitzuak eten, baliabideak agortu edo fitxategiak blokea ditzake."},
+                    {name: "Autentifikazioa", status: "Hautsita", type: "red", detail: "Erabiltzailearen baimen berberak lortzen ditu eta pribilegioak igotzeko baliatzen da."},
+                    {name: "Ez-gaitetzea", status: "Arriskuan", type: "yellow", detail: "Egindako ekintza kaltegarriak baimendutako prozesu legitimoen atzean ezkutatzen dira."}
+                ],
+                realCase: {
+                    title: "Zeus Trojan (Zbot) Banku-Erasoa",
+                    year: "2007 - 2014",
+                    victim: "Mundu osoko bankuak eta enpresak",
+                    summary: "Dokumentu arrunt baten barruan ezkutatuta sartzen zen. Biktimak bankuko orrian sartzean inprimaki faltsuak tartekatzen zituen (Man-in-the-Browser) saio-hasiera lapurtzeko eta ehunka milioi dolar bidegabe transferitzeko."
+                }
+            },
+            {
+                id: "backdoor",
+                title: "Backdoorsak (Atzeko ateak)",
+                category: "Ezkutuko Sarbidea",
+                icon: "door-open",
+                iconColor: "text-purple-700 dark:text-purple-400 bg-purple-100 dark:bg-purple-500/15 border-purple-300 dark:border-purple-500/30",
+                desc: "Sistemaren ohiko autentifikazio eta segurtasun-mekanismoak guztiz saihesteko sortutako sarbide sekretua da, erasotzaileari ekipoan nahi duenean sartzeko aukera emanez.",
+                pillars: [
+                    {name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Erasotzaileak ekipoan dagoen edozein fitxategi ezkutuan irakurri eta deskarga dezake."},
+                    {name: "Osotasuna", status: "Hautsita", type: "red", detail: "Sistemaren konfigurazioak, aplikazioak eta segurtasun-politikak guztiz manipula ditzake."},
+                    {name: "Eskuragarritasuna", status: "Arriskuan", type: "yellow", detail: "Zerbitzariak nahi denean berrabiarazi, itzali edo sare-konexioa moztu dezake."},
+                    {name: "Autentifikazioa", status: "Hautsita", type: "red", detail: "Autentifikazio-zerbitzari guztiak saihesten ditu, pasahitzen beharrik gabe sartuz."},
+                    {name: "Ez-gaitetzea", status: "Hautsita", type: "red", detail: "Sarraldiak ez dira erregistratzen edo erregistro fitxategiak (logs) ezaba ditzake."}
+                ],
+                realCase: {
+                    title: "SolarWinds SUNBURST Eguneraketa",
+                    year: "2020",
+                    victim: "AEBetako Gobernu Sailak & 18.000 erakunde",
+                    summary: "SolarWinds enpresaren Orion plataformaren iturburu-kodean atzeko ate sekretu bat txertatu zuten. Eguneraketa legitimoaren bidez milaka zerbitzaritan sartu ziren inork susmatu gabe."
+                }
+            },
+            {
+                id: "spyware",
+                title: "Spywarea",
+                category: "Espioitza Softwarea",
+                icon: "eye",
+                iconColor: "text-emerald-700 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-500/15 border-emerald-300 dark:border-emerald-500/30",
+                desc: "Erabiltzailearen baimenik gabe bere jarduera digital osoa (teklak, mikrofonoa, kamera, fitxategiak) isilpean grabatu eta kanpoko zerbitzari batera bidaltzen duen malwarea.",
+                pillars: [
+                    {name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Gailuan gertatzen den mugimendu pribatu bakoitza denbora errealean zelatatzen du."},
+                    {name: "Osotasuna", status: "Bermatua", type: "green", detail: "Ez du fitxategirik aldatzen, oharkabean eta ezkutuan jarraitu nahi baitu."},
+                    {name: "Eskuragarritasuna", status: "Bermatua", type: "green", detail: "Sistemak normalean funtzionatzen jarraitzen du biktima ez dadin erasoaz jabetu."},
+                    {name: "Autentifikazioa", status: "Arriskuan", type: "yellow", detail: "Keylogger moduluaren bidez tekleatutako pasahitz guztiak harrapatzen ditu."},
+                    {name: "Ez-gaitetzea", status: "Bermatua", type: "green", detail: "Ez ditu mezuen egiletzak ordezkatzen; informazioa jasotzera mugatzen da."}
+                ],
+                realCase: {
+                    title: "Pegasus (NSO Group)",
+                    year: "2016 - Gaur egun",
+                    victim: "Kazetariak, politikariak eta aktibistak",
+                    summary: "Zero-click motako ahultasunen bidez telefono mugikorretan sartzen da. Biktimak estekarik sakatu gabe, WhatsApp mezuak, dei grabaketak, kamera eta GPS kokapena erauzten ditu."
+                }
+            },
+            {
+                id: "stealer",
+                title: "Stealerrak",
+                category: "Datu-Lapurretarako Malwarea",
+                icon: "shield-alert",
+                iconColor: "text-orange-700 dark:text-orange-400 bg-orange-100 dark:bg-orange-500/15 border-orange-300 dark:border-orange-500/30",
+                desc: "Kredentzialak, saio-cookieak, kreditu-txartelak eta kripto-zorroak azkar erauzteko diseinatutako malware espezifikoa, Dark Webean saltzeko helburuarekin.",
+                pillars: [
+                    {name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Nabigatzaileetan gordetako datu sekretu eta pasahitz guztiak erauzten ditu."},
+                    {name: "Osotasuna", status: "Bermatua", type: "green", detail: "Ez ditu jatorrizko datuak suntsitzen, kopiak lapurtzera mugatzen da."},
+                    {name: "Eskuragarritasuna", status: "Bermatua", type: "green", detail: "Sistema erabilgarri uzten du, biktimak bere pasahitzak berehala aldatu ez ditzan."},
+                    {name: "Autentifikazioa", status: "Hautsita", type: "red", detail: "Saio-cookieak lapurtzean, MFA/2FA autentifikazio bikoitza guztiz saihesten du."},
+                    {name: "Ez-gaitetzea", status: "Arriskuan", type: "yellow", detail: "Lapurrek biktimaren saio legitimoa baliatuz eragiketak egiten dituzte."}
+                ],
+                realCase: {
+                    title: "RedLine Stealer Kanpainak",
+                    year: "2020 - Gaur egun",
+                    victim: "Mundu osoko milioika erabiltzaile eta enpresa-kontu",
+                    summary: "Joko-adabaki eta software piraten bidez zabaltzen da. Segundotan Chrome, Edge eta Firefoxeko pasahitzak eta saio-cookie aktiboak erauzita, enpresa-sareetan sartzen dira inolako alertekin topo egin gabe."
+                }
+            }
+        ];
+
+        const topic2Terms = [
+            {
+                id: "koobface",
+                title: "Koobface",
+                category: "Sare Sozialetako Harra (Worm)",
+                icon: "share-2",
+                iconColor: "text-purple-700 dark:text-purple-400 bg-purple-100 dark:bg-purple-500/15 border-purple-300 dark:border-purple-500/30",
+                desc: "Sare sozialak (Facebook, Myspace, Twitter) erabiliz hedatzen den harra (worm). Konprometitutako kontuetatik lagunei bideo faltsuen estekak bidaltzen dizkie, flash erreproduzitzaile faltsu bat deskargatzeko eskatuz.",
+                pillars: [
+                    {name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Sare sozialetako kredentzialak, cookie-ak eta nabigazio-datuak lapurtzen ditu."},
+                    {name: "Osotasuna", status: "Hautsita", type: "red", detail: "Biktimaren izenean mezu eta mezu-horma berriak argitaratzen ditu baimenik gabe."},
+                    {name: "Eskuragarritasuna", status: "Arriskuan", type: "yellow", detail: "Infektatutako ekipoa moteldu eta iruzurrezko bilaketa-motorretara birbideratzen du."},
+                    {name: "Autentifikazioa", status: "Hautsita", type: "red", detail: "Sare sozialetako saioak bahitzen ditu lagun-zerrenda osoari malwarea bidaltzeko."},
+                    {name: "Ez-gaitetzea", status: "Hautsita", type: "red", detail: "Biktimaren kontu legitimoaren bitartez hedatzen da; lagunek biktima jotzen dute igorletzat."}
+                ],
+                realCase: {
+                    title: "2008-2010 Facebookeko Koobface Izurritea",
+                    year: "2008 - 2010",
+                    victim: "Facebook, MySpace eta Twitter-eko milioika erabiltzaile",
+                    summary: "'Zuk parte hartzen duzun bideo barregarri bat aurkitu dut' estiloko mezu pribatuekin hedatu zen. Erabiltzaileak klik egitean troiar bat instalatzen zen ordenagailuan, eta ekipoa publizitate-iruzurretarako botnet sare batera gehitzen zen."
+                }
+            },
+            {
+                id: "botnet",
+                title: "Botnet",
+                category: "Sare-Armada Kutsatua (Zombi)",
+                icon: "cpu",
+                iconColor: "text-indigo-700 dark:text-indigo-400 bg-indigo-100 dark:bg-indigo-500/15 border-indigo-300 dark:border-indigo-500/30",
+                desc: "Malware bidez infektatutako eta urrunetik kontrolatutako ordenagailu, zerbitzari edo IoT gailuen sare masiboa (ekipo zombiak). Aginte- eta Kontrol-zerbitzari (C2) baten bidez eraso koordinatuak egiteko erabiltzen da.",
+                pillars: [
+                    {name: "Konfidentzialtasuna", status: "Arriskuan", type: "yellow", detail: "C2 zerbitzariak ekipoan biltegiratutako edozein informazio eska eta deskarga dezake."},
+                    {name: "Osotasuna", status: "Hautsita", type: "red", detail: "Sistemako prozesuak eta sare-zerbitzuak birkonfiguratzen ditu bot gisa funtzionatzeko."},
+                    {name: "Eskuragarritasuna", status: "Hautsita", type: "red", detail: "Biktimaren banda-zabalera eta PUZa agortzen ditu DDoS erasoetan edo spam bidalketetan."},
+                    {name: "Autentifikazioa", status: "Arriskuan", type: "yellow", detail: "Administratzailearen jakinaren gainean egon gabe, urruneko agenteak pribilegio altuak ditu."},
+                    {name: "Ez-gaitetzea", status: "Hautsita", type: "red", detail: "Erasoak infektatutako ekipoen IP helbideetatik irteten dira; benetako kriminala ezkutuan geratzen da."}
+                ],
+                realCase: {
+                    title: "Mariposa Botnet (13 milioi ordenagailu)",
+                    year: "2009",
+                    victim: "190 herrialdetako ekipoak, multinazionalak eta bankuak",
+                    summary: "D setup-ak 13 milioi ordenagailu zombi kontrolatzen zituen kredentzialak lapurtzeko eta DDoS erasoak egiteko. Espainiako Polizia Nazionalak eta FBIk elkarlanean desegin zuten sarea, arduradunak atxilotuz."
+                }
+            },
+            {
+                id: "bruteforce",
+                title: "Indar Gordineko Erasoa (Brute Force)",
+                category: "Kredentzial-hauste Kriptografikoa",
+                icon: "lock-keyhole",
+                iconColor: "text-red-700 dark:text-red-400 bg-red-100 dark:bg-red-500/15 border-red-300 dark:border-red-500/30",
+                desc: "Pasahitz, enkriptazio-gako edo kredentzial bat asmatzeko saiakera automatizatu eta errepikakorretan oinarritutako erasoa da, konbinazio posible guztiak edo hiztegi erraldoiak (Dictionary Attack) probatuz sarbidea lortu arte.",
+                pillars: [
+                    {name: "Konfidentzialtasuna", status: "Hautsita", type: "red", detail: "Pasahitza asmatutakoan, babestutako fitxategi eta kontu pribatu guztiak agerian geratzen dira."},
+                    {name: "Osotasuna", status: "Arriskuan", type: "yellow", detail: "Erasotzaileak barruan sartu ondoren konfigurazioak edo datu-baseak manipula ditzake."},
+                    {name: "Eskuragarritasuna", status: "Arriskuan", type: "yellow", detail: "Segundoko milaka saiakerak zerbitzariaren baliabideak kolapsatu edo kontuak blokea ditzakete."},
+                    {name: "Autentifikazioa", status: "Hautsita", type: "red", detail: "Erasoaren xede nagusia da: autentifikazio-hesiak guztiz gainditu eta baimenduta sartzea."},
+                    {name: "Ez-gaitetzea", status: "Bermatua", type: "green", detail: "Saiakera huts guztiek erregistroetan (auth.log) aztarna eta IP helbide garbia uzten dute."}
+                ],
+                realCase: {
+                    title: "SSH eta RDP Zerbitzarien Aurkako Eraso Automatizatuak",
+                    year: "Gaur Egun",
+                    victim: "Internetera irekitako Linux eta Windows zerbitzari korporatiboak",
+                    summary: "Erasotzaileek Hydra edo Medusa bezalako tresnekin eta 'RockYou' estiloko hitz-hiztegiekin segundoko ehunka pasahitz probatzen dituzte 22 (SSH) eta 3389 (RDP) ataken aurka. Babesik gabeko (Fail2ban gabe) zerbitzarietan ordu gutxitan hartzen dute kontrol osoa."
+                }
+            }
+        ];
+
+        const cardStates = {};
+        [...topic1Terms, ...topic2Terms].forEach(t => cardStates[t.id] = false);
+
+        let isSourcesOpen = {1: false};
+
+        function getStatusBadge(status, type) {
+            if (type === 'red') {
+                return `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-extrabold bg-red-100 dark:bg-red-500/20 text-red-900 dark:text-red-300 border border-red-300 dark:border-red-500/40 shrink-0">🔴 ${status}</span>`;
+            } else if (type === 'yellow') {
+                return `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-extrabold bg-amber-100 dark:bg-amber-500/20 text-amber-950 dark:text-amber-200 border border-amber-300 dark:border-amber-500/40 shrink-0">🟡 ${status}</span>`;
+            } else {
+                return `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-extrabold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40 shrink-0">🟢 ${status}</span>`;
+            }
         }
-      }
-      lucide.createIcons();
-    }
 
-    function updateThemeIcon() {
-      const isDark = document.documentElement.classList.contains('dark');
-      const icon = document.getElementById('theme-icon');
-      if (icon) {
-        icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
-        lucide.createIcons();
-      }
-    }
+        function createCardHtml(term) {
+            const isExpanded = cardStates[term.id];
 
-    function toggleDarkMode() {
-      const isDark = document.documentElement.classList.toggle('dark');
-      localStorage.theme = isDark ? 'dark' : 'light';
-      updateThemeIcon();
-      renderCards();
-    }
+            return `
+              <div id="card-${term.id}" class="card-transition flex flex-col w-full min-h-[290px] rounded-2xl bg-white dark:bg-slate-900/90 border-2 ${isExpanded ? 'border-cyan-600 dark:border-cyan-500 shadow-xl ring-2 ring-cyan-500/20' : 'border-slate-300 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 shadow-md'} p-5 transition-all">
 
-    window.addEventListener('DOMContentLoaded', () => {
-      updateThemeIcon();
-      renderCards();
-    });
-  </script>
+                <div class="flex items-start justify-between gap-3 mb-2.5">
+                  <div>
+                    <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-800 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-300 dark:border-cyan-800/60">
+                      ${term.category}
+                    </span>
+                    <h3 class="text-lg sm:text-xl font-extrabold text-slate-950 dark:text-white mt-1">${term.title}</h3>
+                  </div>
+                  <div class="p-2 rounded-xl border-2 ${term.iconColor} shrink-0 shadow-sm">
+                    <i data-lucide="${term.icon}" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                  </div>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-4 flex-1 font-normal">
+                  ${term.desc}
+                </p>
+
+                <div class="pt-2.5 border-t-2 border-slate-200 dark:border-slate-800/80 mt-auto">
+                  <button onclick="toggleCard('${term.id}', event)" class="w-full py-2 px-3.5 rounded-xl text-xs font-bold flex items-center justify-between transition-all duration-200 ${isExpanded ? 'bg-cyan-600/15 text-cyan-900 dark:text-cyan-300 border-2 border-cyan-500/40' : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border-2 border-slate-300 dark:border-slate-700'}">
+                    <span class="flex items-center gap-1.5">
+                      <i data-lucide="${isExpanded ? 'chevron-up' : 'chevron-down'}" class="w-3.5 h-3.5" ></i>
+                      ${isExpanded ? 'Ezkutatu printzipioak eta kasua' : 'Ikusi printzipioak eta benetako kasua'}
+                    </span>
+                    <span class="text-[10px] font-mono font-bold uppercase ${isExpanded ? 'text-cyan-800 dark:text-cyan-400' : 'text-slate-500 dark:text-slate-400'}">
+                      ${isExpanded ? 'Itxi' : 'Ireki'}
+                    </span>
+                  </button>
+                </div>
+
+                <div id="content-${term.id}" class="${isExpanded ? 'block' : 'hidden'} mt-4 space-y-4 pt-3.5 border-t-2 border-slate-200 dark:border-slate-800/60">
+
+                  <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-1.5">
+                      <i data-lucide="layers" class="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400"></i>
+                      Segurtasun-Printzipioak:
+                    </h4>
+                    <div class="space-y-1.5">
+                      ${term.pillars.map(p => `
+                        <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 flex flex-col gap-0.5">
+                          <div class="flex items-center justify-between gap-2">
+                            <span class="text-xs font-bold text-slate-950 dark:text-slate-200">${p.name}</span>${getStatusBadge(p.status, p.type)}
+                          </div>
+                          <p class="text-[11px] text-slate-700 dark:text-slate-400 leading-snug font-normal">${p.detail}</p>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+
+                  <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border-2 border-cyan-400/40 dark:border-cyan-800/40">
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                      <span class="text-[10px] font-mono uppercase tracking-wider font-extrabold text-cyan-800 dark:text-cyan-300 flex items-center gap-1.5">
+                        <i data-lucide="history" class="w-3.5 h-3.5"></i>
+                        Benetako Kasu Erreala
+                      </span>
+                      <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-100 dark:bg-cyan-950 text-cyan-900 dark:text-cyan-400 border border-cyan-300 dark:border-cyan-800">
+                        ${term.realCase.year}
+                      </span>
+                    </div>
+                    <h5 class="text-xs font-extrabold text-slate-950 dark:text-white mb-0.5">${term.realCase.title}</h5>
+                    <p class="text-[11px] text-slate-700 dark:text-slate-300 mb-1.5 font-medium"><strong>Biktima:</strong> ${term.realCase.victim}</p>
+                    <p class="text-xs text-slate-700 dark:text-slate-400 leading-relaxed font-normal">${term.realCase.summary}</p>
+                  </div>
+
+                </div>
+
+              </div>
+            `;
+        }
+
+        function renderCards() {
+            const container1 = document.getElementById('terms-grid-1');
+            const container2 = document.getElementById('terms-grid-2');
+
+            if (container1) {
+                container1.innerHTML = topic1Terms.map(t => createCardHtml(t)).join('');
+            }
+            if (container2) {
+                container2.innerHTML = topic2Terms.map(t => createCardHtml(t)).join('');
+            }
+
+            lucide.createIcons();
+        }
+
+        function toggleCard(id, event) {
+            if (event) event.stopPropagation();
+            cardStates[id] = !cardStates[id];
+            renderCards();
+        }
+
+        function toggleSources(num) {
+            isSourcesOpen[num] = !isSourcesOpen[num];
+            const content = document.getElementById(`sources-content-${num}`);
+            const label = document.getElementById(`sources-btn-label-${num}`);
+            const chevron = document.getElementById(`sources-chevron-${num}`);
+
+            if (isSourcesOpen[num]) {
+                content.classList.remove('hidden');
+                label.textContent = 'Tolestu iturriak';
+                chevron.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                label.textContent = 'Zabaldu iturriak';
+                chevron.classList.remove('rotate-180');
+            }
+            lucide.createIcons();
+        }
+
+        function switchTopic(topic) {
+            const homeSec = document.getElementById('topic-home-content');
+            const topic1Sec = document.getElementById('topic-1-content');
+            const topic2Sec = document.getElementById('topic-2-content');
+            const csSec = document.getElementById('topic-coming-soon');
+
+            const allNavBtns = ['btn-topic-home', 'btn-topic-1', 'btn-topic-2', 'btn-topic-3', 'btn-topic-4'];
+            allNavBtns.forEach(id => {
+                const b = document.getElementById(id);
+                if (b) {
+                    b.className = "px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-slate-200 hover:bg-slate-200/80 dark:hover:bg-slate-800/60 border-2 border-transparent transition-all duration-200 flex items-center gap-1.5";
+                }
+            });
+
+            const activeBtn = document.getElementById(`btn-topic-${topic}`);
+            if (activeBtn) {
+                activeBtn.className = "px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 flex items-center gap-1.5 bg-cyan-500/20 text-cyan-900 dark:text-cyan-300 border-2 border-cyan-500/50 shadow-sm";
+            }
+
+            homeSec.classList.add('hidden');
+            topic1Sec.classList.add('hidden');
+            topic2Sec.classList.add('hidden');
+            csSec.classList.add('hidden');
+
+            if (topic === 'home') {
+                homeSec.classList.remove('hidden');
+            } else if (topic === 1) {
+                topic1Sec.classList.remove('hidden');
+            } else if (topic === 2) {
+                topic2Sec.classList.remove('hidden');
+            } else {
+                csSec.classList.remove('hidden');
+                const csTitle = document.getElementById('cs-title');
+                const csDesc = document.getElementById('cs-desc');
+                const csIcon = document.getElementById('cs-icon');
+
+                csTitle.textContent = `${topic}. Gaia: Garapen Bidean`;
+                csDesc.textContent = "Gai honetako edukiak eta segurtasun-terminoak ikasturtean zehar txertatuko dira hiztegi digitalean.";
+
+                if (csIcon) {
+                    csIcon.setAttribute('data-lucide', topic === 3 ? 'key' : 'shield');
+                }
+            }
+
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            lucide.createIcons();
+        }
+
+        function updateThemeIcon() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const icon = document.getElementById('theme-icon');
+            if (icon) {
+                icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+                lucide.createIcons();
+            }
+        }
+
+        function toggleDarkMode() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+            updateThemeIcon();
+            renderCards();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateThemeIcon();
+            renderCards();
+        });
+    </script>
 </body>
+
 </html>
